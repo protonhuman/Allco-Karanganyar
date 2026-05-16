@@ -1,180 +1,1357 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>All Co Shop - Karang Anyar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = { theme: { extend: { colors: { coffee: { 50:'#fdf8f6', 100:'#f2e8e5', 200:'#eaddd7', 300:'#e0cec7', 400:'#d2bab0', 500:'#a37c6b', 600:'#865f4e', 700:'#694636', 800:'#4c2e21', 900:'#331b11' } }}}}
+        tailwind.config = { theme: { extend: { colors: { coffee: { 50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7', 400: '#d2bab0', 500: '#a37c6b', 600: '#865f4e', 700: '#694636', 800: '#4c2e21', 900: '#331b11' } } } } }
     </script>
     <style>
-        ::-webkit-scrollbar { width: 6px; height: 6px; } ::-webkit-scrollbar-thumb { background: #d2bab0; border-radius: 10px; }
-        @media print { body * { visibility: hidden; } #app-container { display: none !important; } #print-section, #print-section * { visibility: visible !important; } #print-section { display: block !important; position: absolute; left: 0; top: 0; width: 58mm; padding: 5mm; font-family: 'Courier New', Courier, monospace; font-size: 12px; color: black; } .no-print { display: none !important; } }
-        .tab-active { border-bottom: 2px solid #865f4e; color: #865f4e; font-weight: bold; } .hide-scrollbar::-webkit-scrollbar { display: none; } .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d2bab0;
+            border-radius: 10px;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #app-container {
+                display: none !important;
+            }
+
+            #print-section,
+            #print-section * {
+                visibility: visible !important;
+            }
+
+            #print-section {
+                display: block !important;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 58mm;
+                padding: 5mm;
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 12px;
+                color: black;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        .tab-active {
+            border-bottom: 2px solid #865f4e;
+            color: #865f4e;
+            font-weight: bold;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
+
 <body class="bg-coffee-50 text-coffee-900 font-sans h-[100dvh] w-screen overflow-hidden flex flex-col">
-    
+
     <div id="app-container" class="w-full h-full flex flex-col overflow-hidden">
-        <header id="main-header" class="hidden bg-coffee-800 text-white p-3 md:p-4 shadow-md flex-shrink-0 flex justify-between items-center z-30">
-            <div><h1 class="text-lg md:text-xl font-bold tracking-wider leading-tight">ALL CO SHOP</h1><p class="text-[10px] md:text-xs text-coffee-200">Cabang Karang Anyar</p></div>
-            <div class="flex items-center gap-3"><span class="bg-green-500 w-2 h-2 rounded-full animate-pulse" title="Terkoneksi Firebase"></span><span id="user-info" class="text-xs md:text-sm font-medium hidden md:block"></span><button onclick="logout()" class="bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded text-xs font-bold shadow-sm">Keluar</button></div>
+        <header id="main-header"
+            class="hidden bg-coffee-800 text-white p-3 md:p-4 shadow-md flex-shrink-0 flex justify-between items-center z-30">
+            <div>
+                <h1 class="text-lg md:text-xl font-bold tracking-wider leading-tight">ALL CO SHOP</h1>
+                <p class="text-[10px] md:text-xs text-coffee-200">Cabang Karang Anyar</p>
+            </div>
+            <div class="flex items-center gap-3"><span class="bg-green-500 w-2 h-2 rounded-full animate-pulse"
+                    title="Terkoneksi Firebase"></span><span id="user-info"
+                    class="text-xs md:text-sm font-medium hidden md:block"></span><button onclick="logout()"
+                    class="bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded text-xs font-bold shadow-sm">Keluar</button>
+            </div>
         </header>
 
         <main class="flex-1 overflow-hidden relative">
             <div id="view-login" class="h-full overflow-y-auto flex items-center justify-center bg-coffee-100 p-4">
                 <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg w-full max-w-md border border-coffee-200">
-                    <div class="text-center mb-6 md:mb-8"><div class="w-16 h-16 md:w-20 md:h-20 bg-coffee-800 rounded-full mx-auto mb-4 flex items-center justify-center"><span class="text-white font-bold text-xl md:text-2xl">AC</span></div><h2 class="text-xl md:text-2xl font-bold text-coffee-900">All Co Shop</h2><p class="text-sm text-coffee-500">Sistem Kasir Terpadu</p></div>
+                    <div class="text-center mb-6 md:mb-8">
+                        <div
+                            class="w-16 h-16 md:w-20 md:h-20 bg-coffee-800 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white font-bold text-xl md:text-2xl">AC</span></div>
+                        <h2 class="text-xl md:text-2xl font-bold text-coffee-900">All Co Shop</h2>
+                        <p class="text-sm text-coffee-500">Sistem Kasir Terpadu</p>
+                    </div>
                     <form id="form-login" onsubmit="handleLogin(event)" class="space-y-4 md:space-y-5">
-                        <div id="login-error" class="hidden bg-red-100 text-red-700 p-3 rounded text-sm text-center font-medium"></div>
-                        <div><label class="block text-sm font-bold mb-1 text-gray-700">Username</label><input type="text" id="login-username" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-coffee-500 outline-none bg-gray-50"></div>
-                        <div><label class="block text-sm font-bold mb-1 text-gray-700">Password</label><input type="password" id="login-password" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-coffee-500 outline-none bg-gray-50"></div>
-                        <button type="submit" id="btn-login" class="w-full bg-coffee-600 hover:bg-coffee-700 text-white font-bold py-3.5 rounded-lg shadow-md mt-2 transition">Masuk</button>
+                        <div id="login-error"
+                            class="hidden bg-red-100 text-red-700 p-3 rounded text-sm text-center font-medium"></div>
+                        <div><label class="block text-sm font-bold mb-1 text-gray-700">Username</label><input
+                                type="text" id="login-username" required
+                                class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-coffee-500 outline-none bg-gray-50">
+                        </div>
+                        <div><label class="block text-sm font-bold mb-1 text-gray-700">Password</label><input
+                                type="password" id="login-password" required
+                                class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-coffee-500 outline-none bg-gray-50">
+                        </div>
+                        <button type="submit" id="btn-login"
+                            class="w-full bg-coffee-600 hover:bg-coffee-700 text-white font-bold py-3.5 rounded-lg shadow-md mt-2 transition">Masuk</button>
                     </form>
                 </div>
             </div>
 
             <div id="view-superadmin" class="hidden h-full overflow-y-auto p-4 md:p-6 w-full">
-                <div class="max-w-6xl mx-auto"><div class="mb-4 flex justify-between items-center"><div><h2 class="text-xl md:text-2xl font-bold">Panel Super Admin</h2></div><button onclick="bukaModalEditPass()" class="bg-coffee-500 hover:bg-coffee-600 text-white px-3 py-1.5 rounded text-xs md:text-sm font-bold shadow-sm transition">Ubah Password Saya</button></div>
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200"><div class="p-3 md:p-4 border-b flex justify-between items-center"><h3 class="font-bold text-sm md:text-base">Daftar Akun</h3><button onclick="oMod('modal-tambah-akun','superadmin')" class="bg-green-600 text-white px-3 py-1.5 rounded text-xs md:text-sm font-bold shadow">+ Buat Akun</button></div>
-                    <div class="overflow-x-auto w-full"><table class="w-full text-left text-sm min-w-[400px]"><thead class="bg-gray-100"><tr><th class="p-3 border-b">Username</th><th class="p-3 border-b">Role</th><th class="p-3 border-b text-center">Aksi</th></tr></thead><tbody id="table-users-sa"></tbody></table></div></div>
+                <div class="max-w-6xl mx-auto">
+                    <div class="mb-4 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-xl md:text-2xl font-bold">Panel Super Admin</h2>
+                        </div>
+                        <button onclick="bukaModalEditPass()"
+                            class="bg-coffee-500 hover:bg-coffee-600 text-white px-3 py-1.5 rounded text-xs md:text-sm font-bold shadow-sm transition">Ubah
+                            Password Saya</button>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-4">
+                        <div class="p-3 md:p-4 border-b flex justify-between items-center">
+                            <h3 class="font-bold text-sm md:text-base">Daftar Akun</h3>
+                            <button onclick="oMod('modal-tambah-akun','superadmin')"
+                                class="bg-green-600 text-white px-3 py-1.5 rounded text-xs md:text-sm font-bold shadow">+
+                                Buat Akun</button>
+                        </div>
+                        <div class="overflow-x-auto w-full">
+                            <table class="w-full text-left text-sm min-w-[400px]">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th class="p-3 border-b">Username</th>
+                                        <th class="p-3 border-b">Role</th>
+                                        <th class="p-3 border-b text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-users-sa"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                            <h3 class="font-bold text-sm md:text-base mb-3">Pengaturan Paket Lisensi</h3>
+                            <div class="flex items-center gap-4">
+                                <label class="flex items-center gap-2 cursor-pointer"><input type="radio"
+                                        name="appPackage" value="basic" onchange="setPackage('basic')" class="w-4 h-4">
+                                    <span class="font-bold text-sm">Basic</span></label>
+                                <label class="flex items-center gap-2 cursor-pointer"><input type="radio"
+                                        name="appPackage" value="pro" onchange="setPackage('pro')" class="w-4 h-4">
+                                    <span class="font-bold text-sm">Pro</span></label>
+                                <span id="pkg-status" class="text-xs text-gray-500 ml-2"></span>
+                            </div>
+                            <div class="mt-3 text-xs text-gray-500">
+                                <p><b>Basic:</b> Dashboard tanpa stok, tanpa free order, tanpa edit transaksi, tanpa
+                                    riwayat kasir</p>
+                                <p><b>Pro:</b> Semua fitur lengkap</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                            <h3 class="font-bold text-sm md:text-base mb-3">Pengaturan Lisensi</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-600 mb-1">Tipe Lisensi</label>
+                                    <select id="license-type" class="w-full border border-gray-300 p-2 rounded text-sm"
+                                        onchange="toggleLicenseInput()">
+                                        <option value="monthly">Bulanan</option>
+                                        <option value="daily">Harian (kelipatan hari)</option>
+                                        <option value="lifetime">Lifetime (Seumur Hidup)</option>
+                                    </select>
+                                </div>
+                                <div id="license-duration-area" class="hidden">
+                                    <label class="block text-xs font-bold text-gray-600 mb-1">Durasi</label>
+                                    <div id="license-monthly-input" class="hidden">
+                                        <select id="license-months"
+                                            class="w-full border border-gray-300 p-2 rounded text-sm">
+                                            <option value="1">1 Bulan</option>
+                                            <option value="3">3 Bulan</option>
+                                            <option value="6">6 Bulan</option>
+                                            <option value="12">12 Bulan</option>
+                                        </select>
+                                    </div>
+                                    <div id="license-daily-input" class="hidden">
+                                        <input type="number" id="license-days" min="1" value="30"
+                                            class="w-full border border-gray-300 p-2 rounded text-sm">
+                                        <p class="text-[10px] text-gray-500 mt-1">Masukkan jumlah hari</p>
+                                    </div>
+                                </div>
+                                <div id="license-preview" class="text-sm font-bold text-indigo-700"></div>
+                                <button onclick="simpanLisensi()"
+                                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded text-sm font-bold shadow">Simpan
+                                    Lisensi</button>
+                                <div id="current-license-info" class="mt-2 text-xs text-gray-600 border-t pt-2"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div id="view-pemilik" class="hidden h-full flex flex-col overflow-hidden w-full">
+                <div id="license-warning"
+                    class="hidden bg-yellow-100 border-b border-yellow-200 text-yellow-800 px-4 py-2 text-sm font-bold flex items-center gap-2">
+                    <span>⚠️</span> <span id="license-warning-text"></span>
+                </div>
                 <div class="bg-white border-b border-gray-200 flex-shrink-0">
                     <div class="flex overflow-x-auto whitespace-nowrap hide-scrollbar">
-                        <button onclick="switchTab('tab-dashboard')" id="btn-tab-dashboard" class="tab-btn tab-active py-3 px-4 text-sm font-medium transition">Dashboard</button>
-                        <button onclick="switchTab('tab-menu')" id="btn-tab-menu" class="tab-btn py-3 px-4 text-sm text-gray-500 font-medium transition">Menu & Harga</button>
-                        <button onclick="switchTab('tab-stok')" id="btn-tab-stok" class="tab-btn py-3 px-4 text-sm text-gray-500 font-medium transition">Stok & Tutup Buku</button>
-                        <button onclick="switchTab('tab-penjualan')" id="btn-tab-penjualan" class="tab-btn py-3 px-4 text-sm text-gray-500 font-medium transition">Penjualan</button>
-                        <button onclick="switchTab('tab-akun')" id="btn-tab-akun" class="tab-btn py-3 px-4 text-sm text-gray-500 font-medium transition">Akun Penjual</button>
+                        <button onclick="switchTab('tab-dashboard')" id="btn-tab-dashboard"
+                            class="tab-btn tab-active py-3 px-4 text-sm font-medium transition">Dashboard</button>
+                        <button onclick="switchTab('tab-menu')" id="btn-tab-menu"
+                            class="tab-btn py-3 px-4 text-sm text-gray-500 font-medium transition">Menu & Harga</button>
+                        <button onclick="switchTab('tab-stok')" id="btn-tab-stok"
+                            class="tab-btn py-3 px-4 text-sm text-gray-500 font-medium transition">Stok & Tutup
+                            Buku</button>
+                        <button onclick="switchTab('tab-penjualan')" id="btn-tab-penjualan"
+                            class="tab-btn py-3 px-4 text-sm text-gray-500 font-medium transition">Penjualan</button>
+                        <button onclick="switchTab('tab-akun')" id="btn-tab-akun"
+                            class="tab-btn py-3 px-4 text-sm text-gray-500 font-medium transition">Akun Penjual</button>
                     </div>
                 </div>
-
                 <div class="flex-1 p-3 md:p-6 overflow-y-auto bg-gray-50">
                     <div id="tab-dashboard" class="tab-content space-y-4 md:space-y-6">
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-2 gap-2"><div class="flex items-center gap-3"><h2 class="text-lg md:text-xl font-bold">Ringkasan Omset</h2></div><div class="flex items-center gap-2 bg-white border border-gray-200 px-2 py-1.5 rounded shadow-sm w-full md:w-auto overflow-x-auto"><input type="date" id="dash-start" class="text-xs md:text-sm outline-none border-none bg-transparent font-medium" onchange="onDateFilterChange()"><span class="text-xs text-gray-500 font-bold">S/D</span><input type="date" id="dash-end" class="text-xs md:text-sm outline-none border-none bg-transparent font-medium" onchange="onDateFilterChange()"></div></div>
+                        <div
+                            class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-2 gap-2">
+                            <div class="flex items-center gap-3">
+                                <h2 class="text-lg md:text-xl font-bold">Ringkasan Omset</h2>
+                            </div>
+                            <div
+                                class="flex items-center gap-2 bg-white border border-gray-200 px-2 py-1.5 rounded shadow-sm w-full md:w-auto overflow-x-auto">
+                                <input type="date" id="dash-start"
+                                    class="text-xs md:text-sm outline-none border-none bg-transparent font-medium"
+                                    onchange="onDateFilterChange()"><span
+                                    class="text-xs text-gray-500 font-bold">S/D</span><input type="date" id="dash-end"
+                                    class="text-xs md:text-sm outline-none border-none bg-transparent font-medium"
+                                    onchange="onDateFilterChange()"></div>
+                        </div>
                         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-3 md:gap-4">
-                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-green-500 shadow-sm"><p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Pendapatan Uang</p><h3 id="dash-omset" class="text-lg md:text-2xl font-bold text-gray-800 break-all">Rp 0</h3></div>
-                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-yellow-500 shadow-sm"><p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">CASH</p><h3 id="dash-cash" class="text-base md:text-xl font-bold text-gray-800 break-all">Rp 0</h3></div>
-                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-purple-500 shadow-sm"><p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">QRIS</p><h3 id="dash-qris" class="text-base md:text-xl font-bold text-gray-800 break-all">Rp 0</h3></div>
-                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-pink-500 shadow-sm"><p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Total Nilai Free Order</p><h3 id="dash-free-omset" class="text-base md:text-xl font-bold text-gray-800 break-all">Rp 0</h3></div>
-                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-blue-500 shadow-sm"><p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Total Transaksi</p><h3 id="dash-trx" class="text-lg md:text-2xl font-bold text-gray-800">0</h3></div>
-                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-orange-500 shadow-sm"><p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Tot. Cup Terjual</p><h3 id="dash-tot-cup" class="text-base md:text-xl font-bold text-gray-800">0 Pcs</h3></div>
-                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-teal-500 shadow-sm"><p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Tot. Botol Terjual</p><h3 id="dash-tot-botol" class="text-base md:text-xl font-bold text-gray-800">0 Pcs</h3></div>
+                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-green-500 shadow-sm">
+                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">
+                                    Pendapatan Uang</p>
+                                <h3 id="dash-omset" class="text-lg md:text-2xl font-bold text-gray-800 break-all">Rp 0
+                                </h3>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-yellow-500 shadow-sm">
+                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">
+                                    CASH</p>
+                                <h3 id="dash-cash" class="text-base md:text-xl font-bold text-gray-800 break-all">Rp 0
+                                </h3>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-purple-500 shadow-sm">
+                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">
+                                    QRIS</p>
+                                <h3 id="dash-qris" class="text-base md:text-xl font-bold text-gray-800 break-all">Rp 0
+                                </h3>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-pink-500 shadow-sm">
+                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">
+                                    Total Nilai Free Order</p>
+                                <h3 id="dash-free-omset" class="text-base md:text-xl font-bold text-gray-800 break-all">
+                                    Rp 0</h3>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-blue-500 shadow-sm">
+                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">
+                                    Total Transaksi</p>
+                                <h3 id="dash-trx" class="text-lg md:text-2xl font-bold text-gray-800">0</h3>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-orange-500 shadow-sm"
+                                id="dash-card-cup">
+                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">
+                                    Tot. Cup Terjual</p>
+                                <h3 id="dash-tot-cup" class="text-base md:text-xl font-bold text-gray-800">0 Pcs</h3>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border-l-4 border-l-teal-500 shadow-sm"
+                                id="dash-card-botol">
+                                <p class="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">
+                                    Tot. Botol Terjual</p>
+                                <h3 id="dash-tot-botol" class="text-base md:text-xl font-bold text-gray-800">0 Pcs</h3>
+                            </div>
                         </div>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                            <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm w-full"><h3 class="font-bold border-b pb-2 mb-3 text-sm md:text-base">Pemakaian Cup & Botolan <span class="text-gray-500 font-normal text-xs">(Auto)</span></h3><div class="overflow-x-auto w-full"><table class="w-full text-xs md:text-sm text-left min-w-[500px]"><thead class="bg-gray-100"><tr><th class="p-2 border-b">Item/Ukuran</th><th class="p-2 border-b text-center">Sisa Kmrn</th><th class="p-2 border-b text-center text-blue-600">+Stok</th><th class="p-2 border-b text-center text-red-600">Dipakai</th><th class="p-2 border-b text-center text-orange-500">-Rusak</th><th class="p-2 border-b text-center font-bold">Sisa Akhir</th></tr></thead><tbody id="dash-cup-table" class="divide-y divide-gray-100"></tbody></table></div></div>
-                            <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm w-full flex flex-col"><h3 class="font-bold border-b pb-2 mb-3 text-sm md:text-base">Penjualan per Menu <span class="text-gray-500 font-normal text-xs">(Sort: Terlaris)</span></h3><div class="overflow-y-auto flex-1 max-h-80"><table class="w-full text-xs md:text-sm text-left relative"><thead class="bg-gray-100 sticky top-0 shadow-sm"><tr><th class="p-2 border-b">Nama Menu</th><th class="p-2 border-b text-center">Total Qty Terjual</th></tr></thead><tbody id="dash-menu-terjual" class="divide-y divide-gray-100"></tbody></table></div></div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="dash-stok-section">
+                            <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm w-full">
+                                <h3 class="font-bold border-b pb-2 mb-3 text-sm md:text-base">Pemakaian Cup & Botolan
+                                    <span class="text-gray-500 font-normal text-xs">(Auto)</span></h3>
+                                <div class="overflow-x-auto w-full">
+                                    <table class="w-full text-xs md:text-sm text-left min-w-[500px]">
+                                        <thead class="bg-gray-100">
+                                            <tr>
+                                                <th class="p-2 border-b">Item/Ukuran</th>
+                                                <th class="p-2 border-b text-center">Sisa Kmrn</th>
+                                                <th class="p-2 border-b text-center text-blue-600">+Stok</th>
+                                                <th class="p-2 border-b text-center text-red-600">Dipakai</th>
+                                                <th class="p-2 border-b text-center text-orange-500">-Rusak</th>
+                                                <th class="p-2 border-b text-center font-bold">Sisa Akhir</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="dash-cup-table" class="divide-y divide-gray-100"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm w-full flex flex-col">
+                                <h3 class="font-bold border-b pb-2 mb-3 text-sm md:text-base">Penjualan per Menu <span
+                                        class="text-gray-500 font-normal text-xs">(Sort: Terlaris)</span></h3>
+                                <div class="overflow-y-auto flex-1 max-h-80">
+                                    <table class="w-full text-xs md:text-sm text-left relative">
+                                        <thead class="bg-gray-100 sticky top-0 shadow-sm">
+                                            <tr>
+                                                <th class="p-2 border-b">Nama Menu</th>
+                                                <th class="p-2 border-b text-center">Total Qty Terjual</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="dash-menu-terjual" class="divide-y divide-gray-100"></tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div id="tab-menu" class="tab-content hidden"><h2 class="text-lg md:text-xl font-bold mb-4">Manajemen Menu</h2><div class="flex flex-col lg:flex-row gap-4 md:gap-6"><div class="w-full lg:w-1/3"><div class="bg-white p-4 md:p-5 rounded-lg border shadow-sm lg:sticky lg:top-0"><h3 id="form-menu-title" class="font-bold mb-4 border-b pb-2 text-sm md:text-base">Tambah Menu Baru</h3><form id="form-tambah-menu-inline" onsubmit="hSimpanMenu(event)"><input type="hidden" id="menu-id"><div class="mb-3"><label class="block text-xs font-bold text-gray-600 mb-1">Kategori</label><select id="menu-kategori" class="w-full border border-gray-300 p-2.5 rounded bg-gray-50 outline-none text-sm" onchange="tglKtg()"><option value="KOPI">Kopi (Ukuran)</option><option value="NON_KOPI">Non Kopi (Ukuran)</option><option value="SIRUP">Sirup / Topping (Satuan)</option><option value="BOTOLAN">Botolan (Satuan)</option></select></div><div class="mb-3"><label class="block text-xs font-bold text-gray-600 mb-1">Nama Item</label><input type="text" id="menu-nama" required class="w-full border border-gray-300 p-2.5 rounded bg-gray-50 outline-none text-sm"></div><div id="area-harga-minuman" class="grid grid-cols-2 gap-3 mb-4"><div><label class="block text-xs font-bold text-gray-500 mb-1">Harga XS</label><input type="number" id="menu-harga-xs" class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50"></div><div><label class="block text-xs font-bold text-gray-500 mb-1">Harga S</label><input type="number" id="menu-harga-s" class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50"></div><div><label class="block text-xs font-bold text-gray-500 mb-1">Harga M</label><input type="number" id="menu-harga-m" class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50"></div><div><label class="block text-xs font-bold text-gray-500 mb-1">Harga L</label><input type="number" id="menu-harga-l" class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50"></div></div><div id="area-harga-botolan" class="grid grid-cols-3 gap-3 mb-4 hidden"><div><label class="block text-[10px] font-bold text-gray-500 mb-1">250ml (Rp)</label><input type="number" id="menu-harga-b250" class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50"></div><div><label class="block text-[10px] font-bold text-gray-500 mb-1">500ml (Rp)</label><input type="number" id="menu-harga-b500" class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50"></div><div><label class="block text-[10px] font-bold text-gray-500 mb-1">1 Liter (Rp)</label><input type="number" id="menu-harga-b1l" class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50"></div></div><div id="area-harga-sirup" class="mb-4 hidden"><label class="block text-xs font-bold text-gray-500 mb-1">Harga Satuan (Rp)</label><input type="number" id="menu-harga-satuan" class="w-full border border-gray-300 p-2.5 rounded bg-gray-50 text-sm outline-none"></div><div class="flex gap-2 mt-2"><button type="submit" id="btn-submit-menu" class="w-full bg-coffee-600 text-white py-2.5 rounded font-bold text-sm shadow">Simpan</button><button type="button" id="btn-cancel-edit-menu" onclick="batEdMenu()" class="hidden bg-gray-200 text-gray-700 px-4 rounded font-bold text-sm">Batal</button></div></form></div></div><div class="w-full lg:w-2/3"><div class="bg-white rounded-lg border shadow-sm overflow-hidden w-full"><div class="bg-gray-50 border-b border-gray-200 p-3 flex gap-2 overflow-x-auto whitespace-nowrap"><button onclick="setMenuTab('KOPI')" id="btn-mg-KOPI" class="mg-tab-btn px-4 py-1.5 bg-coffee-600 text-white rounded-full font-bold text-xs shadow-sm">Kopi</button><button onclick="setMenuTab('NON_KOPI')" id="btn-mg-NON_KOPI" class="mg-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full font-bold text-xs shadow-sm">Non Kopi</button><button onclick="setMenuTab('SIRUP')" id="btn-mg-SIRUP" class="mg-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full font-bold text-xs shadow-sm">Sirup</button><button onclick="setMenuTab('BOTOLAN')" id="btn-mg-BOTOLAN" class="mg-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full font-bold text-xs shadow-sm">Botolan</button></div><div class="overflow-x-auto w-full"><table class="w-full text-left text-sm min-w-[500px]"><thead class="bg-gray-100" id="thead-menu"><tr><th class="p-3 border-b">Nama</th><th class="p-3 border-b text-center">XS/Sat.</th><th class="p-3 border-b text-center">S</th><th class="p-3 border-b text-center">M</th><th class="p-3 border-b text-center">L</th><th class="p-3 border-b text-center">Aksi</th></tr></thead><tbody id="table-menu" class="divide-y divide-gray-100"></tbody></table></div></div></div></div></div>
-
-                    <div id="tab-stok" class="tab-content hidden max-w-4xl"><div class="flex justify-between items-center mb-4"><h2 class="text-lg md:text-xl font-bold text-gray-800">Manajemen Stok Fisik & Tutup Buku</h2></div>
+                    <div id="tab-menu" class="tab-content hidden">
+                        <h2 class="text-lg md:text-xl font-bold mb-4">Manajemen Menu</h2>
+                        <div class="flex flex-col lg:flex-row gap-4 md:gap-6">
+                            <div class="w-full lg:w-1/3">
+                                <div class="bg-white p-4 md:p-5 rounded-lg border shadow-sm lg:sticky lg:top-0">
+                                    <h3 id="form-menu-title" class="font-bold mb-4 border-b pb-2 text-sm md:text-base">
+                                        Tambah Menu Baru</h3>
+                                    <form id="form-tambah-menu-inline" onsubmit="hSimpanMenu(event)"><input
+                                            type="hidden" id="menu-id">
+                                        <div class="mb-3"><label
+                                                class="block text-xs font-bold text-gray-600 mb-1">Kategori</label><select
+                                                id="menu-kategori"
+                                                class="w-full border border-gray-300 p-2.5 rounded bg-gray-50 outline-none text-sm"
+                                                onchange="tglKtg()">
+                                                <option value="KOPI">Kopi (Ukuran)</option>
+                                                <option value="NON_KOPI">Non Kopi (Ukuran)</option>
+                                                <option value="SIRUP">Sirup / Topping (Satuan)</option>
+                                                <option value="BOTOLAN">Botolan (Satuan)</option>
+                                            </select></div>
+                                        <div class="mb-3"><label class="block text-xs font-bold text-gray-600 mb-1">Nama
+                                                Item</label><input type="text" id="menu-nama" required
+                                                class="w-full border border-gray-300 p-2.5 rounded bg-gray-50 outline-none text-sm">
+                                        </div>
+                                        <div id="area-harga-minuman" class="grid grid-cols-3 gap-3 mb-4">
+                                            <div><label class="block text-xs font-bold text-gray-500 mb-1">Harga
+                                                    S</label><input type="number" id="menu-harga-s"
+                                                    class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50">
+                                            </div>
+                                            <div><label class="block text-xs font-bold text-gray-500 mb-1">Harga
+                                                    M</label><input type="number" id="menu-harga-m"
+                                                    class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50">
+                                            </div>
+                                            <div><label class="block text-xs font-bold text-gray-500 mb-1">Harga
+                                                    L</label><input type="number" id="menu-harga-l"
+                                                    class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50">
+                                            </div>
+                                        </div>
+                                        <div id="area-harga-botolan" class="grid grid-cols-3 gap-3 mb-4 hidden">
+                                            <div><label class="block text-[10px] font-bold text-gray-500 mb-1">250ml
+                                                    (Rp)</label><input type="number" id="menu-harga-b250"
+                                                    class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50">
+                                            </div>
+                                            <div><label class="block text-[10px] font-bold text-gray-500 mb-1">500ml
+                                                    (Rp)</label><input type="number" id="menu-harga-b500"
+                                                    class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50">
+                                            </div>
+                                            <div><label class="block text-[10px] font-bold text-gray-500 mb-1">1 Liter
+                                                    (Rp)</label><input type="number" id="menu-harga-b1l"
+                                                    class="w-full border border-gray-300 p-2 rounded text-sm bg-gray-50">
+                                            </div>
+                                        </div>
+                                        <div id="area-harga-sirup" class="mb-4 hidden"><label
+                                                class="block text-xs font-bold text-gray-500 mb-1">Harga Satuan
+                                                (Rp)</label><input type="number" id="menu-harga-satuan"
+                                                class="w-full border border-gray-300 p-2.5 rounded bg-gray-50 text-sm outline-none">
+                                        </div>
+                                        <div class="flex gap-2 mt-2"><button type="submit" id="btn-submit-menu"
+                                                class="w-full bg-coffee-600 text-white py-2.5 rounded font-bold text-sm shadow">Simpan</button><button
+                                                type="button" id="btn-cancel-edit-menu" onclick="batEdMenu()"
+                                                class="hidden bg-gray-200 text-gray-700 px-4 rounded font-bold text-sm">Batal</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-2/3">
+                                <div class="bg-white rounded-lg border shadow-sm overflow-hidden w-full">
+                                    <div
+                                        class="bg-gray-50 border-b border-gray-200 p-3 flex gap-2 overflow-x-auto whitespace-nowrap">
+                                        <button onclick="setMenuTab('KOPI')" id="btn-mg-KOPI"
+                                            class="mg-tab-btn px-4 py-1.5 bg-coffee-600 text-white rounded-full font-bold text-xs shadow-sm">Kopi</button><button
+                                            onclick="setMenuTab('NON_KOPI')" id="btn-mg-NON_KOPI"
+                                            class="mg-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full font-bold text-xs shadow-sm">Non
+                                            Kopi</button><button onclick="setMenuTab('SIRUP')" id="btn-mg-SIRUP"
+                                            class="mg-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full font-bold text-xs shadow-sm">Sirup</button><button
+                                            onclick="setMenuTab('BOTOLAN')" id="btn-mg-BOTOLAN"
+                                            class="mg-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full font-bold text-xs shadow-sm">Botolan</button>
+                                    </div>
+                                    <div class="overflow-x-auto w-full">
+                                        <table class="w-full text-left text-sm min-w-[500px]">
+                                            <thead class="bg-gray-100" id="thead-menu">
+                                                <tr>
+                                                    <th class="p-3 border-b">Nama</th>
+                                                    <th class="p-3 border-b text-center">S/Sat</th>
+                                                    <th class="p-3 border-b text-center">M</th>
+                                                    <th class="p-3 border-b text-center">L</th>
+                                                    <th class="p-3 border-b text-center">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="table-menu" class="divide-y divide-gray-100"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-stok" class="tab-content hidden max-w-4xl">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg md:text-xl font-bold text-gray-800">Manajemen Stok Fisik & Tutup Buku
+                            </h2>
+                        </div>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-6">
-                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-200"><h3 class="font-bold mb-4 border-b pb-2 text-blue-600">Tambah Masuk (+)</h3><form onsubmit="hInputStok(event, 'tambah')"><div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-5"><div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup XS</label><input type="number" id="stok-xs" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup S</label><input type="number" id="stok-s" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup M</label><input type="number" id="stok-m" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup L</label><input type="number" id="stok-l" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-blue-600 mb-1 uppercase mt-2">Botol 250ml</label><input type="number" id="stok-b250" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-blue-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-blue-600 mb-1 uppercase mt-2">Botol 500ml</label><input type="number" id="stok-b500" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-blue-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-blue-600 mb-1 uppercase mt-2">Botol 1 Liter</label><input type="number" id="stok-b1l" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-blue-50 text-center font-bold"></div></div><button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-bold shadow-md transition">Simpan Tambah Stok</button></form></div>
-                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-200"><h3 class="font-bold mb-4 border-b pb-2 text-orange-600">Reject/Rusak (-)</h3><form onsubmit="hInputStok(event, 'reject')"><div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-5"><div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup XS</label><input type="number" id="reject-xs" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup S</label><input type="number" id="reject-s" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup M</label><input type="number" id="reject-m" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup L</label><input type="number" id="reject-l" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-orange-600 mb-1 uppercase mt-2">Botol 250ml</label><input type="number" id="reject-b250" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-orange-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-orange-600 mb-1 uppercase mt-2">Botol 500ml</label><input type="number" id="reject-b500" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-orange-50 text-center font-bold"></div><div><label class="block text-[10px] font-bold text-orange-600 mb-1 uppercase mt-2">Botol 1 Liter</label><input type="number" id="reject-b1l" min="0" value="0" class="w-full border border-gray-300 p-2 rounded bg-orange-50 text-center font-bold"></div></div><button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-bold shadow-md transition">Simpan Barang Reject</button></form></div>
+                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-200">
+                                <h3 class="font-bold mb-4 border-b pb-2 text-blue-600">Tambah Masuk (+)</h3>
+                                <form onsubmit="hInputStok(event, 'tambah')">
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-5">
+                                        <div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup
+                                                S</label><input type="number" id="stok-s" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold">
+                                        </div>
+                                        <div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup
+                                                M</label><input type="number" id="stok-m" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold">
+                                        </div>
+                                        <div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup
+                                                L</label><input type="number" id="stok-l" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold">
+                                        </div>
+                                        <div><label
+                                                class="block text-[10px] font-bold text-blue-600 mb-1 uppercase mt-2">Botol
+                                                250ml</label><input type="number" id="stok-b250" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-blue-50 text-center font-bold">
+                                        </div>
+                                        <div><label
+                                                class="block text-[10px] font-bold text-blue-600 mb-1 uppercase mt-2">Botol
+                                                500ml</label><input type="number" id="stok-b500" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-blue-50 text-center font-bold">
+                                        </div>
+                                        <div><label
+                                                class="block text-[10px] font-bold text-blue-600 mb-1 uppercase mt-2">Botol
+                                                1 Liter</label><input type="number" id="stok-b1l" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-blue-50 text-center font-bold">
+                                        </div>
+                                    </div><button type="submit"
+                                        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-bold shadow-md transition">Simpan
+                                        Tambah Stok</button>
+                                </form>
+                            </div>
+                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-200">
+                                <h3 class="font-bold mb-4 border-b pb-2 text-orange-600">Reject/Rusak (-)</h3>
+                                <form onsubmit="hInputStok(event, 'reject')">
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-5">
+                                        <div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup
+                                                S</label><input type="number" id="reject-s" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold">
+                                        </div>
+                                        <div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup
+                                                M</label><input type="number" id="reject-m" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold">
+                                        </div>
+                                        <div><label class="block text-[10px] font-bold text-gray-600 mb-1 uppercase">Cup
+                                                L</label><input type="number" id="reject-l" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-gray-50 text-center font-bold">
+                                        </div>
+                                        <div><label
+                                                class="block text-[10px] font-bold text-orange-600 mb-1 uppercase mt-2">Botol
+                                                250ml</label><input type="number" id="reject-b250" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-orange-50 text-center font-bold">
+                                        </div>
+                                        <div><label
+                                                class="block text-[10px] font-bold text-orange-600 mb-1 uppercase mt-2">Botol
+                                                500ml</label><input type="number" id="reject-b500" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-orange-50 text-center font-bold">
+                                        </div>
+                                        <div><label
+                                                class="block text-[10px] font-bold text-orange-600 mb-1 uppercase mt-2">Botol
+                                                1 Liter</label><input type="number" id="reject-b1l" min="0" value="0"
+                                                class="w-full border border-gray-300 p-2 rounded bg-orange-50 text-center font-bold">
+                                        </div>
+                                    </div><button type="submit"
+                                        class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-bold shadow-md transition">Simpan
+                                        Barang Reject</button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="bg-indigo-50 p-5 rounded-lg border border-indigo-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4"><div><h3 class="font-bold text-indigo-800 text-lg mb-1">Tutup Shift (Tutup Buku)</h3><p class="text-xs text-indigo-600">Simpan rekap otomatis via Batch Writes. Lakukan 1x di akhir hari.</p></div><button onclick="tutupBuku()" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg">Lakukan Tutup Buku</button></div>
+                        <div
+                            class="bg-indigo-50 p-5 rounded-lg border border-indigo-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div>
+                                <h3 class="font-bold text-indigo-800 text-lg mb-1">Tutup Shift (Tutup Buku)</h3>
+                                <p class="text-xs text-indigo-600">Simpan rekap otomatis via Batch Writes. Lakukan 1x di
+                                    akhir hari.</p>
+                            </div><button onclick="tutupBuku()"
+                                class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg">Lakukan Tutup
+                                Buku</button>
+                        </div>
                     </div>
-
-                    <div id="tab-penjualan" class="tab-content hidden"><div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3"><div class="flex flex-col sm:flex-row items-start sm:items-center gap-3"><h2 class="text-lg md:text-xl font-bold">Laporan Penjualan</h2><div class="flex gap-3 text-xs font-bold bg-white px-3 py-1.5 border border-gray-200 rounded-lg shadow-sm"><span>CASH: <span id="sum-cash" class="text-green-600">Rp 0</span></span><span class="text-gray-300">|</span><span>QRIS: <span id="sum-qris" class="text-blue-600">Rp 0</span></span></div></div><div class="flex flex-col sm:flex-row gap-2 md:gap-4 w-full md:w-auto"><div class="flex gap-2 w-full sm:w-auto"><select id="filter-metode" class="border p-2 rounded text-xs font-bold flex-1 sm:w-auto bg-white shadow-sm" onchange="renJual()"><option value="ALL">Semua Bayar</option><option value="CASH">Hanya CASH</option><option value="QRIS">Hanya QRIS</option></select><input type="date" id="filter-date" class="border p-2 rounded text-xs font-bold flex-1 sm:w-auto bg-white shadow-sm" onchange="onDateFilterChange()"></div><button onclick="downloadCSV()" class="bg-indigo-600 text-white px-4 py-2 rounded text-xs font-bold shadow w-full sm:w-auto">↓ Export Excel</button></div></div>
-                        <div id="area-req-free" class="mb-6 hidden"><h3 class="font-bold text-orange-600 mb-2">Persetujuan Free Order</h3><div class="bg-orange-50 rounded-lg border border-orange-200 overflow-hidden shadow-sm"><div class="overflow-x-auto w-full"><table class="w-full text-left text-sm min-w-[700px]"><thead class="bg-orange-100 text-orange-800"><tr><th class="p-3 border-b">ID / Kasir</th><th class="p-3 border-b">Waktu</th><th class="p-3 border-b w-1/3">Item</th><th class="p-3 border-b">Keterangan</th><th class="p-3 border-b text-center">Aksi</th></tr></thead><tbody id="table-req-free" class="divide-y divide-orange-200"></tbody></table></div></div></div>
-                        <div class="bg-white rounded-lg border shadow-sm overflow-hidden w-full"><div class="overflow-x-auto w-full"><table class="w-full text-left text-sm min-w-[700px]"><thead class="bg-gray-100"><tr><th class="p-3 border-b">ID Trx</th><th class="p-3 border-b">Waktu</th><th class="p-3 border-b">Penjual</th><th class="p-3 border-b w-1/3">Item</th><th class="p-3 border-b">Total</th><th class="p-3 border-b text-center">Aksi</th></tr></thead><tbody id="table-penjualan-pemilik" class="divide-y divide-gray-100"></tbody></table></div></div>
+                    <div id="tab-penjualan" class="tab-content hidden">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                                <h2 class="text-lg md:text-xl font-bold">Laporan Penjualan</h2>
+                                <div
+                                    class="flex gap-3 text-xs font-bold bg-white px-3 py-1.5 border border-gray-200 rounded-lg shadow-sm">
+                                    <span>CASH: <span id="sum-cash" class="text-green-600">Rp 0</span></span><span
+                                        class="text-gray-300">|</span><span>QRIS: <span id="sum-qris"
+                                            class="text-blue-600">Rp 0</span></span></div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-2 md:gap-4 w-full md:w-auto">
+                                <div class="flex gap-2 w-full sm:w-auto"><select id="filter-metode"
+                                        class="border p-2 rounded text-xs font-bold flex-1 sm:w-auto bg-white shadow-sm"
+                                        onchange="renJual()">
+                                        <option value="ALL">Semua Bayar</option>
+                                        <option value="CASH">Hanya CASH</option>
+                                        <option value="QRIS">Hanya QRIS</option>
+                                    </select><input type="date" id="filter-date"
+                                        class="border p-2 rounded text-xs font-bold flex-1 sm:w-auto bg-white shadow-sm"
+                                        onchange="onDateFilterChange()"></div><button onclick="downloadCSV()"
+                                    id="btn-export-csv"
+                                    class="bg-indigo-600 text-white px-4 py-2 rounded text-xs font-bold shadow w-full sm:w-auto">↓
+                                    Export Excel</button>
+                            </div>
+                        </div>
+                        <div id="area-req-free" class="mb-6 hidden">
+                            <h3 class="font-bold text-orange-600 mb-2">Persetujuan Free Order</h3>
+                            <div class="bg-orange-50 rounded-lg border border-orange-200 overflow-hidden shadow-sm">
+                                <div class="overflow-x-auto w-full">
+                                    <table class="w-full text-left text-sm min-w-[700px]">
+                                        <thead class="bg-orange-100 text-orange-800">
+                                            <tr>
+                                                <th class="p-3 border-b">ID / Kasir</th>
+                                                <th class="p-3 border-b">Waktu</th>
+                                                <th class="p-3 border-b w-1/3">Item</th>
+                                                <th class="p-3 border-b">Keterangan</th>
+                                                <th class="p-3 border-b text-center">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table-req-free" class="divide-y divide-orange-200"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg border shadow-sm overflow-hidden w-full">
+                            <div class="overflow-x-auto w-full">
+                                <table class="w-full text-left text-sm min-w-[700px]">
+                                    <thead class="bg-gray-100">
+                                        <tr>
+                                            <th class="p-3 border-b">ID Trx</th>
+                                            <th class="p-3 border-b">Waktu</th>
+                                            <th class="p-3 border-b">Penjual</th>
+                                            <th class="p-3 border-b w-1/3">Item</th>
+                                            <th class="p-3 border-b">Total</th>
+                                            <th class="p-3 border-b text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-penjualan-pemilik" class="divide-y divide-gray-100"></tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-
-                    <div id="tab-akun" class="tab-content hidden max-w-4xl"><div class="flex justify-between items-center mb-4"><h2 class="text-lg md:text-xl font-bold">Akun Penjual</h2><button onclick="oMod('modal-tambah-akun','pemilik')" class="bg-green-600 text-white px-4 py-2 rounded text-xs font-bold shadow">+ Buat Akun</button></div><div class="bg-white rounded-lg border shadow-sm overflow-hidden w-full"><div class="overflow-x-auto w-full"><table class="w-full text-left text-sm min-w-[400px]"><thead class="bg-gray-100"><tr><th class="p-3 border-b">Username</th><th class="p-3 border-b">Peran</th><th class="p-3 border-b text-center">Aksi</th></tr></thead><tbody id="table-users-owner"></tbody></table></div></div></div>
+                    <div id="tab-akun" class="tab-content hidden max-w-4xl">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg md:text-xl font-bold">Akun Penjual</h2><button
+                                onclick="oMod('modal-tambah-akun','pemilik')"
+                                class="bg-green-600 text-white px-4 py-2 rounded text-xs font-bold shadow">+ Buat
+                                Akun</button>
+                        </div>
+                        <div class="bg-white rounded-lg border shadow-sm overflow-hidden w-full">
+                            <div class="overflow-x-auto w-full">
+                                <table class="w-full text-left text-sm min-w-[400px]">
+                                    <thead class="bg-gray-100">
+                                        <tr>
+                                            <th class="p-3 border-b">Username</th>
+                                            <th class="p-3 border-b">Peran</th>
+                                            <th class="p-3 border-b text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-users-owner"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- VIEW KASIR -->
             <div id="view-penjual" class="hidden h-full flex flex-col md:flex-row bg-gray-100 overflow-hidden w-full">
-                <div class="w-full h-[45%] md:h-full md:flex-1 flex flex-col overflow-hidden bg-gray-50"><div class="bg-white p-3 shadow-sm z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-gray-200 flex-shrink-0"><h2 class="text-base md:text-lg font-bold text-gray-800">Katalog Menu</h2><div class="flex gap-2 overflow-x-auto w-full sm:w-auto pb-1 hide-scrollbar"><button onclick="setPosTab('KOPI')" id="btn-pos-KOPI" class="pos-tab-btn px-4 py-1.5 bg-coffee-600 text-white rounded-full font-bold text-[11px] md:text-xs whitespace-nowrap shadow-sm">Kopi</button><button onclick="setPosTab('NON_KOPI')" id="btn-pos-NON_KOPI" class="pos-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-600 rounded-full font-bold text-[11px] md:text-xs whitespace-nowrap shadow-sm">Non Kopi</button><button onclick="setPosTab('SIRUP')" id="btn-pos-SIRUP" class="pos-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-600 rounded-full font-bold text-[11px] md:text-xs whitespace-nowrap shadow-sm">Sirup</button><button onclick="setPosTab('BOTOLAN')" id="btn-pos-BOTOLAN" class="pos-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-600 rounded-full font-bold text-[11px] md:text-xs whitespace-nowrap shadow-sm">Botolan</button></div></div><div class="p-3 md:p-4 overflow-y-auto flex-1 min-h-0"><div id="pos-menu-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 pb-2 md:pb-0"></div></div></div>
-                <div class="w-full h-[55%] md:h-full md:w-[22rem] lg:w-[24rem] bg-white flex flex-col border-t-2 md:border-t-0 md:border-l border-gray-200 shadow-lg z-20 flex-shrink-0"><div class="p-2 md:p-4 bg-coffee-800 text-white flex justify-between items-center flex-shrink-0"><h2 class="font-bold text-sm md:text-base">Pesanan Baru</h2><div class="flex gap-2"><button onclick="bukaRiwayatKasir()" class="text-[10px] md:text-xs bg-blue-600 text-white px-2 py-1 rounded font-bold shadow-sm">Riwayat</button><button onclick="clrCart()" class="text-[10px] md:text-xs bg-red-600 text-white px-2 py-1 rounded font-bold shadow-sm">Kosongkan</button></div></div><div id="pos-cart-items" class="flex-1 overflow-y-auto p-2 md:p-3 space-y-2 bg-gray-50 min-h-0"><div class="text-center text-gray-400 text-xs md:text-sm mt-4 md:mt-6 font-medium">Keranjang masih kosong</div></div><div class="p-2 md:p-4 border-t border-gray-200 bg-white flex-shrink-0"><div class="flex justify-between items-center mb-1.5 md:mb-2"><label class="text-[10px] md:text-xs font-bold text-gray-500 uppercase">Metode:</label><div class="flex gap-3"><label class="flex items-center gap-1.5 cursor-pointer"><input type="radio" name="metode-bayar" value="CASH" checked class="w-3.5 h-3.5 text-coffee-600" onchange="tgMet()"><span class="text-xs font-bold text-gray-700">CASH</span></label><label class="flex items-center gap-1.5 cursor-pointer"><input type="radio" name="metode-bayar" value="QRIS" class="w-3.5 h-3.5 text-coffee-600" onchange="tgMet()"><span class="text-xs font-bold text-gray-700">QRIS</span></label></div></div><div id="area-cash-input" class="mb-2 md:mb-3 bg-gray-50 p-2 rounded border border-gray-200"><div class="flex items-center justify-between gap-2"><label class="text-[10px] md:text-xs font-bold text-gray-600 whitespace-nowrap">Uang Pembeli:</label><input type="number" id="input-uang-cash" class="w-full md:w-3/5 border border-gray-300 p-1.5 md:p-2 rounded text-sm font-bold text-right outline-none" placeholder="0" oninput="hitKemb()"></div><div class="flex justify-between items-center mt-1"><span class="text-[10px] md:text-xs font-bold text-gray-500">Kembalian:</span><span id="text-kembalian" class="text-xs md:text-sm font-bold text-gray-800">Rp 0</span></div></div><div class="flex justify-between items-end mb-2 md:mb-3 border-t border-gray-200 pt-1.5 md:pt-2"><span class="font-bold text-gray-600 text-xs md:text-sm">Total Tagihan:</span><span id="pos-total" class="text-xl md:text-2xl font-bold text-coffee-800 leading-none">Rp 0</span></div><div class="flex gap-2" id="area-tombol-pos"><button id="btn-req-free-pos" onclick="oMod('modal-req-free')" class="w-[30%] bg-orange-500 text-white font-bold py-2 md:py-3.5 rounded-lg text-[10px] md:text-sm hidden">Req Free</button><button id="btn-simpan-pos" onclick="doPay()" class="w-full bg-green-600 text-white font-bold py-2 md:py-3.5 rounded-lg text-sm md:text-base">Simpan Transaksi</button></div></div></div>
+                <div class="w-full h-[45%] md:h-full md:flex-1 flex flex-col overflow-hidden bg-gray-50">
+                    <div
+                        class="bg-white p-3 shadow-sm z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-gray-200 flex-shrink-0">
+                        <h2 class="text-base md:text-lg font-bold text-gray-800">Katalog Menu</h2>
+                        <div class="flex gap-2 overflow-x-auto w-full sm:w-auto pb-1 hide-scrollbar"><button
+                                onclick="setPosTab('KOPI')" id="btn-pos-KOPI"
+                                class="pos-tab-btn px-4 py-1.5 bg-coffee-600 text-white rounded-full font-bold text-[11px] md:text-xs whitespace-nowrap shadow-sm">Kopi</button><button
+                                onclick="setPosTab('NON_KOPI')" id="btn-pos-NON_KOPI"
+                                class="pos-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-600 rounded-full font-bold text-[11px] md:text-xs whitespace-nowrap shadow-sm">Non
+                                Kopi</button><button onclick="setPosTab('SIRUP')" id="btn-pos-SIRUP"
+                                class="pos-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-600 rounded-full font-bold text-[11px] md:text-xs whitespace-nowrap shadow-sm">Sirup</button><button
+                                onclick="setPosTab('BOTOLAN')" id="btn-pos-BOTOLAN"
+                                class="pos-tab-btn px-4 py-1.5 bg-white border border-gray-300 text-gray-600 rounded-full font-bold text-[11px] md:text-xs whitespace-nowrap shadow-sm">Botolan</button>
+                        </div>
+                    </div>
+                    <div class="p-3 md:p-4 overflow-y-auto flex-1 min-h-0">
+                        <div id="pos-menu-grid"
+                            class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 pb-2 md:pb-0"></div>
+                    </div>
+                </div>
+                <div
+                    class="w-full h-[55%] md:h-full md:w-[22rem] lg:w-[24rem] bg-white flex flex-col border-t-2 md:border-t-0 md:border-l border-gray-200 shadow-lg z-20 flex-shrink-0">
+                    <div class="p-2 md:p-4 bg-coffee-800 text-white flex justify-between items-center flex-shrink-0">
+                        <h2 class="font-bold text-sm md:text-base">Pesanan Baru</h2>
+                        <div class="flex gap-2" id="pos-btn-group"><button onclick="bukaRiwayatKasir()"
+                                id="btn-riwayat-pos"
+                                class="text-[10px] md:text-xs bg-blue-600 text-white px-2 py-1 rounded font-bold shadow-sm">Riwayat</button><button
+                                onclick="clrCart()"
+                                class="text-[10px] md:text-xs bg-red-600 text-white px-2 py-1 rounded font-bold shadow-sm">Kosongkan</button>
+                        </div>
+                    </div>
+                    <div id="pos-cart-items" class="flex-1 overflow-y-auto p-2 md:p-3 space-y-2 bg-gray-50 min-h-0">
+                        <div class="text-center text-gray-400 text-xs md:text-sm mt-4 md:mt-6 font-medium">Keranjang
+                            masih kosong</div>
+                    </div>
+                    <div class="p-2 md:p-4 border-t border-gray-200 bg-white flex-shrink-0">
+                        <div class="flex justify-between items-center mb-1.5 md:mb-2"><label
+                                class="text-[10px] md:text-xs font-bold text-gray-500 uppercase">Metode:</label>
+                            <div class="flex gap-3"><label class="flex items-center gap-1.5 cursor-pointer"><input
+                                        type="radio" name="metode-bayar" value="CASH" checked
+                                        class="w-3.5 h-3.5 text-coffee-600" onchange="tgMet()"><span
+                                        class="text-xs font-bold text-gray-700">CASH</span></label><label
+                                    class="flex items-center gap-1.5 cursor-pointer"><input type="radio"
+                                        name="metode-bayar" value="QRIS" class="w-3.5 h-3.5 text-coffee-600"
+                                        onchange="tgMet()"><span
+                                        class="text-xs font-bold text-gray-700">QRIS</span></label></div>
+                        </div>
+                        <div id="area-cash-input" class="mb-2 md:mb-3 bg-gray-50 p-2 rounded border border-gray-200">
+                            <div class="flex items-center justify-between gap-2"><label
+                                    class="text-[10px] md:text-xs font-bold text-gray-600 whitespace-nowrap">Uang
+                                    Pembeli:</label><input type="number" id="input-uang-cash"
+                                    class="w-full md:w-3/5 border border-gray-300 p-1.5 md:p-2 rounded text-sm font-bold text-right outline-none"
+                                    placeholder="0" oninput="hitKemb()"></div>
+                            <div class="flex justify-between items-center mt-1"><span
+                                    class="text-[10px] md:text-xs font-bold text-gray-500">Kembalian:</span><span
+                                    id="text-kembalian" class="text-xs md:text-sm font-bold text-gray-800">Rp 0</span>
+                            </div>
+                        </div>
+                        <div
+                            class="flex justify-between items-end mb-2 md:mb-3 border-t border-gray-200 pt-1.5 md:pt-2">
+                            <span class="font-bold text-gray-600 text-xs md:text-sm">Total Tagihan:</span><span
+                                id="pos-total" class="text-xl md:text-2xl font-bold text-coffee-800 leading-none">Rp
+                                0</span></div>
+                        <div class="flex gap-2" id="area-tombol-pos"><button id="btn-req-free-pos"
+                                onclick="oMod('modal-req-free')"
+                                class="w-[30%] bg-orange-500 text-white font-bold py-2 md:py-3.5 rounded-lg text-[10px] md:text-sm hidden">Req
+                                Free</button><button id="btn-simpan-pos" onclick="doPay()"
+                                class="w-full bg-green-600 text-white font-bold py-2 md:py-3.5 rounded-lg text-sm md:text-base">Simpan
+                                Transaksi</button></div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
 
-    <!-- MODALS -->
-    <div id="modal-req-free" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4"><div class="bg-white rounded-xl p-5 w-full max-w-sm m-auto shadow-2xl"><h3 class="text-base font-bold mb-2 text-orange-600">Request Free Order</h3><input type="text" id="free-alasan" placeholder="Alasan (Wajib)..." class="w-full border border-gray-300 p-2.5 rounded bg-gray-50 outline-none text-sm mb-4"><div class="flex gap-2"><button onclick="cMod('modal-req-free')" class="flex-1 bg-gray-200 py-2.5 rounded-lg font-bold text-sm">Batal</button><button onclick="submitFreeOrder()" class="flex-1 bg-orange-500 text-white py-2.5 rounded-lg font-bold text-sm">Kirim</button></div></div></div>
-    <div id="modal-pilih-ukuran" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4"><div class="bg-white rounded-xl p-5 w-full max-w-xs max-h-[90vh] flex flex-col shadow-2xl m-auto"><h3 id="modal-ukuran-title" class="text-base font-bold mb-4 text-center border-b pb-2 flex-shrink-0">Pilih</h3><input type="hidden" id="modal-ukuran-menuid"><div class="space-y-2 mb-4 overflow-y-auto flex-1 hide-scrollbar" id="ukuran-options"></div><div class="flex items-center justify-center gap-4 mb-5 flex-shrink-0"><button onclick="uQty(-1)" class="bg-gray-100 w-10 h-10 rounded-full font-bold text-lg shadow-sm">-</button><span id="modal-ukuran-qty" class="text-xl font-bold w-8 text-center text-coffee-800">1</span><button onclick="uQty(1)" class="bg-gray-100 w-10 h-10 rounded-full font-bold text-lg shadow-sm">+</button></div><div class="flex gap-2 flex-shrink-0"><button onclick="cMod('modal-pilih-ukuran')" class="flex-1 bg-gray-200 py-2.5 rounded-lg font-bold text-sm">Batal</button><button onclick="addCart()" class="flex-1 bg-coffee-600 text-white py-2.5 rounded-lg font-bold text-sm">Tambah</button></div></div></div>
-    <div id="modal-tambah-akun" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4"><div class="bg-white rounded-xl p-5 w-full max-w-sm max-h-[90vh] flex flex-col shadow-2xl m-auto"><h3 class="text-base font-bold mb-4 border-b pb-2 flex-shrink-0">Buat Akun</h3><form id="form-tambah-akun" onsubmit="hTambahAkun(event)"><input type="hidden" id="akun-context"><div class="mb-3"><input type="text" id="new-username" placeholder="Username" required class="w-full border p-2 rounded"></div><div class="mb-3"><input type="password" id="new-password" placeholder="Password" required class="w-full border p-2 rounded"></div><div class="mb-3"><select id="new-role" class="w-full border p-2 rounded" onchange="document.getElementById('area-akses-free').style.display=this.value==='penjual'?'block':'none'"><option value="penjual">Penjual</option><option value="pemilik" id="opt-pemilik">Pemilik</option></select></div><div class="mb-4" id="area-akses-free"><label class="flex items-center gap-2"><input type="checkbox" id="new-can-free" class="w-4 h-4 text-coffee-600 rounded"><span class="text-xs font-bold text-gray-700">Akses Req Free Order</span></label></div><div class="flex gap-2"><button type="button" onclick="cMod('modal-tambah-akun')" class="flex-1 bg-gray-200 py-2.5 rounded-lg font-bold text-sm">Batal</button><button type="submit" class="flex-1 bg-green-600 text-white py-2.5 rounded-lg font-bold text-sm">Simpan</button></div></form></div></div>
-    <div id="modal-ubah-password" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4"><div class="bg-white rounded-xl p-5 w-full max-w-sm m-auto shadow-2xl"><h3 class="text-base font-bold mb-4 border-b pb-2">Ubah Pass <span id="ubah-pass-target" class="text-coffee-600"></span></h3><form onsubmit="hUbahPass(event)"><input type="hidden" id="edit-pass-username"><div class="mb-5"><input type="password" id="update-password" required class="w-full border p-2.5 rounded" placeholder="Password Baru"></div><div class="flex gap-2"><button type="button" onclick="cMod('modal-ubah-password')" class="flex-1 bg-gray-200 py-2.5 rounded-lg font-bold text-sm">Batal</button><button type="submit" class="flex-1 bg-coffee-600 text-white py-2.5 rounded-lg font-bold text-sm">Simpan</button></div></form></div></div>
-    <div id="modal-edit-trx" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4"><div class="bg-white rounded-xl p-4 w-full max-w-lg max-h-[95vh] flex flex-col shadow-2xl m-auto"><h3 class="text-base md:text-lg font-bold border-b pb-2 flex-shrink-0">Edit Transaksi</h3><p class="text-[10px] text-gray-500 mb-3 mt-1 font-mono">ID: <span id="edit-trx-id"></span></p><div class="mb-3 flex-shrink-0"><select id="ed-mbayar" class="w-full border p-2 rounded text-sm"><option value="CASH">CASH</option><option value="QRIS">QRIS</option></select></div><div class="flex-1 overflow-y-auto mb-4 border p-2 bg-gray-50 rounded-lg hide-scrollbar space-y-2" id="edit-trx-items"></div><div class="flex gap-2 flex-shrink-0 pt-2"><button onclick="cMod('modal-edit-trx')" class="flex-1 bg-gray-200 py-2.5 rounded-lg font-bold text-sm">Batal</button><button onclick="svEdTrx()" class="flex-1 bg-blue-600 text-white py-2.5 rounded-lg font-bold text-sm">Update</button></div></div></div>
-    <div id="modal-pilih-printer" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4"><div class="bg-white rounded-xl p-5 w-full max-w-xs m-auto shadow-2xl text-center"><h3 class="text-base font-bold mb-4 text-gray-800">Metode Cetak</h3><button onclick="cetakRawBT()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold text-sm shadow mb-2">Cetak Bluetooth (RawBT)</button><button onclick="cetakWebBrowser()" class="w-full bg-gray-100 text-gray-700 border py-3 rounded-lg font-bold text-sm shadow-sm">Cetak Browser/PDF</button><button onclick="cMod('modal-pilih-printer')" class="w-full mt-2 text-red-500 py-2">Batal</button></div></div>
-    <div id="modal-riwayat-kasir" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4"><div class="bg-white rounded-xl p-4 w-full max-w-md max-h-[90vh] flex flex-col shadow-2xl m-auto"><div class="flex justify-between items-center border-b pb-2 mb-2 flex-shrink-0"><h3 class="text-base font-bold">5 Transaksi Terakhir</h3><button onclick="cMod('modal-riwayat-kasir')" class="text-xl leading-none">&times;</button></div><div class="flex-1 overflow-y-auto hide-scrollbar space-y-2 p-1" id="list-riwayat-kasir"></div></div></div>
-
-    <!-- PRINT SECTION -->
-    <div id="print-section" class="hidden"><div style="text-align:center;margin-bottom:10px;border-bottom:1px dashed black;padding-bottom:5px;"><h2 style="margin:0;font-size:16px;">ALL CO SHOP</h2><p style="margin:2px 0;font-size:10px;">Cabang Karang Anyar</p></div><div style="margin-bottom:10px;font-size:10px;"><div>Tgl: <span id="print-date"></span></div><div>Kasir: <span id="print-kasir"></span></div><div>No: <span id="print-id"></span></div><div>Bayar: <span id="print-metode"></span></div></div><div style="border-bottom:1px dashed black;margin-bottom:5px;"></div><table style="width:100%;font-size:10px;margin-bottom:10px;" id="print-items-table"></table><div style="border-top:1px dashed black;padding-top:5px;text-align:right;font-size:12px;font-weight:bold;">TOTAL: <span id="print-total"></span></div><div id="print-cash-section" style="display:none; text-align:right; font-size:10px; margin-top:3px;"><div>Tunai: <span id="print-tunai"></span></div><div>Kembali: <span id="print-kembali"></span></div></div><div style="text-align:center;margin-top:15px;font-size:10px;"><p>Terima Kasih</p></div></div>
+    <div id="modal-req-free" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl p-5 w-full max-w-sm m-auto shadow-2xl">
+            <h3 class="text-base font-bold mb-2 text-orange-600">Request Free Order</h3><input type="text"
+                id="free-alasan" placeholder="Alasan (Wajib)..."
+                class="w-full border border-gray-300 p-2.5 rounded bg-gray-50 outline-none text-sm mb-4">
+            <div class="flex gap-2"><button onclick="cMod('modal-req-free')"
+                    class="flex-1 bg-gray-200 py-2.5 rounded-lg font-bold text-sm">Batal</button><button
+                    onclick="submitFreeOrder()"
+                    class="flex-1 bg-orange-500 text-white py-2.5 rounded-lg font-bold text-sm">Kirim</button></div>
+        </div>
+    </div>
+    <div id="modal-pilih-ukuran"
+        class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl p-5 w-full max-w-xs max-h-[90vh] flex flex-col shadow-2xl m-auto">
+            <h3 id="modal-ukuran-title" class="text-base font-bold mb-4 text-center border-b pb-2 flex-shrink-0">Pilih
+            </h3><input type="hidden" id="modal-ukuran-menuid">
+            <div class="space-y-2 mb-4 overflow-y-auto flex-1 hide-scrollbar" id="ukuran-options"></div>
+            <div class="flex items-center justify-center gap-4 mb-5 flex-shrink-0"><button onclick="uQty(-1)"
+                    class="bg-gray-100 w-10 h-10 rounded-full font-bold text-lg shadow-sm">-</button><span
+                    id="modal-ukuran-qty" class="text-xl font-bold w-8 text-center text-coffee-800">1</span><button
+                    onclick="uQty(1)" class="bg-gray-100 w-10 h-10 rounded-full font-bold text-lg shadow-sm">+</button>
+            </div>
+            <div class="flex gap-2 flex-shrink-0"><button onclick="cMod('modal-pilih-ukuran')"
+                    class="flex-1 bg-gray-200 py-2.5 rounded-lg font-bold text-sm">Batal</button><button
+                    onclick="addCart()"
+                    class="flex-1 bg-coffee-600 text-white py-2.5 rounded-lg font-bold text-sm">Tambah</button></div>
+        </div>
+    </div>
+    <div id="modal-tambah-akun"
+        class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl p-5 w-full max-w-sm max-h-[90vh] flex flex-col shadow-2xl m-auto">
+            <h3 class="text-base font-bold mb-4 border-b pb-2 flex-shrink-0">Buat Akun</h3>
+            <form id="form-tambah-akun" onsubmit="hTambahAkun(event)"><input type="hidden" id="akun-context">
+                <div class="mb-3"><input type="text" id="new-username" placeholder="Username" required
+                        class="w-full border p-2 rounded"></div>
+                <div class="mb-3"><input type="password" id="new-password" placeholder="Password" required
+                        class="w-full border p-2 rounded"></div>
+                <div class="mb-3"><select id="new-role" class="w-full border p-2 rounded"
+                        onchange="document.getElementById('area-akses-free').style.display=this.value==='penjual'?'block':'none'">
+                        <option value="penjual">Penjual</option>
+                        <option value="pemilik" id="opt-pemilik">Pemilik</option>
+                    </select></div>
+                <div class="mb-4" id="area-akses-free"><label class="flex items-center gap-2"><input type="checkbox"
+                            id="new-can-free" class="w-4 h-4 text-coffee-600 rounded"><span
+                            class="text-xs font-bold text-gray-700">Akses Req Free Order</span></label></div>
+                <div class="flex gap-2"><button type="button" onclick="cMod('modal-tambah-akun')"
+                        class="flex-1 bg-gray-200 py-2.5 rounded-lg font-bold text-sm">Batal</button><button
+                        type="submit"
+                        class="flex-1 bg-green-600 text-white py-2.5 rounded-lg font-bold text-sm">Simpan</button></div>
+            </form>
+        </div>
+    </div>
+    <div id="modal-ubah-password"
+        class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl p-5 w-full max-w-sm m-auto shadow-2xl">
+            <h3 class="text-base font-bold mb-4 border-b pb-2">Ubah Pass <span id="ubah-pass-target"
+                    class="text-coffee-600"></span></h3>
+            <form onsubmit="hUbahPass(event)"><input type="hidden" id="edit-pass-username">
+                <div class="mb-5"><input type="password" id="update-password" required
+                        class="w-full border p-2.5 rounded" placeholder="Password Baru"></div>
+                <div class="flex gap-2"><button type="button" onclick="cMod('modal-ubah-password')"
+                        class="flex-1 bg-gray-200 py-2.5 rounded-lg font-bold text-sm">Batal</button><button
+                        type="submit"
+                        class="flex-1 bg-coffee-600 text-white py-2.5 rounded-lg font-bold text-sm">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="modal-edit-trx" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl p-4 w-full max-w-lg max-h-[95vh] flex flex-col shadow-2xl m-auto">
+            <h3 class="text-base md:text-lg font-bold border-b pb-2 flex-shrink-0">Edit Transaksi</h3>
+            <p class="text-[10px] text-gray-500 mb-3 mt-1 font-mono">ID: <span id="edit-trx-id"></span></p>
+            <div class="mb-3 flex-shrink-0"><select id="ed-mbayar" class="w-full border p-2 rounded text-sm">
+                    <option value="CASH">CASH</option>
+                    <option value="QRIS">QRIS</option>
+                </select></div>
+            <div class="flex-1 overflow-y-auto mb-4 border p-2 bg-gray-50 rounded-lg hide-scrollbar space-y-2"
+                id="edit-trx-items"></div>
+            <div class="flex gap-2 flex-shrink-0 pt-2"><button onclick="cMod('modal-edit-trx')"
+                    class="flex-1 bg-gray-200 py-2.5 rounded-lg font-bold text-sm">Batal</button><button
+                    onclick="svEdTrx()"
+                    class="flex-1 bg-blue-600 text-white py-2.5 rounded-lg font-bold text-sm">Update</button></div>
+        </div>
+    </div>
+    <div id="modal-pilih-printer"
+        class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl p-5 w-full max-w-xs m-auto shadow-2xl text-center">
+            <h3 class="text-base font-bold mb-4 text-gray-800">Metode Cetak</h3><button onclick="cetakRawBT()"
+                class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold text-sm shadow mb-2">Cetak Bluetooth
+                (RawBT)</button><button onclick="cetakWebBrowser()"
+                class="w-full bg-gray-100 text-gray-700 border py-3 rounded-lg font-bold text-sm shadow-sm">Cetak
+                Browser/PDF</button><button onclick="cMod('modal-pilih-printer')"
+                class="w-full mt-2 text-red-500 py-2">Batal</button>
+        </div>
+    </div>
+    <div id="modal-riwayat-kasir"
+        class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl p-4 w-full max-w-md max-h-[90vh] flex flex-col shadow-2xl m-auto">
+            <div class="flex justify-between items-center border-b pb-2 mb-2 flex-shrink-0">
+                <h3 class="text-base font-bold">5 Transaksi Terakhir</h3><button onclick="cMod('modal-riwayat-kasir')"
+                    class="text-xl leading-none">&times;</button>
+            </div>
+            <div class="flex-1 overflow-y-auto hide-scrollbar space-y-2 p-1" id="list-riwayat-kasir"></div>
+        </div>
+    </div>
+    <div id="print-section" class="hidden">
+        <div style="text-align:center;margin-bottom:10px;border-bottom:1px dashed black;padding-bottom:5px;">
+            <h2 style="margin:0;font-size:16px;">ALL CO SHOP</h2>
+            <p style="margin:2px 0;font-size:10px;">Cabang Karang Anyar</p>
+        </div>
+        <div style="margin-bottom:10px;font-size:10px;">
+            <div>Tgl: <span id="print-date"></span></div>
+            <div>Kasir: <span id="print-kasir"></span></div>
+            <div>No: <span id="print-id"></span></div>
+            <div>Bayar: <span id="print-metode"></span></div>
+        </div>
+        <div style="border-bottom:1px dashed black;margin-bottom:5px;"></div>
+        <table style="width:100%;font-size:10px;margin-bottom:10px;" id="print-items-table"></table>
+        <div style="border-top:1px dashed black;padding-top:5px;text-align:right;font-size:12px;font-weight:bold;">
+            TOTAL: <span id="print-total"></span></div>
+        <div id="print-cash-section" style="display:none; text-align:right; font-size:10px; margin-top:3px;">
+            <div>Tunai: <span id="print-tunai"></span></div>
+            <div>Kembali: <span id="print-kembali"></span></div>
+        </div>
+        <div style="text-align:center;margin-top:15px;font-size:10px;">
+            <p>Terima Kasih</p>
+        </div>
+    </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, doc, setDoc, getDocs, onSnapshot, deleteDoc, query, where, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        const app=initializeApp({apiKey:"AIzaSyBNEPbn2CNscy-Xod3g5xcssQVkwgmhD4",authDomain:"all-co-karang-anyar.firebaseapp.com",projectId:"all-co-karang-anyar",storageBucket:"all-co-karang-anyar.firebasestorage.app",messagingSenderId:"273793519964",appId:"1:273793519964:web:4360897b3a8deee764b199",measurementId:"G-FCPW36R6JS"});
-        const db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})});
-        const appId='allcoshop-final';const getP=c=>typeof __firebase_config!=='undefined'?`artifacts/${appId}/public/data/${c}`:c;
-        let st={currentUser:null,users:[],menu:[],stok:[],penjualan:[]},cart=[],curMenu=null,unsubs=[],currentPosTab='KOPI',currentMgmtTab='KOPI',trxToPrint=null;
-        const el=i=>document.getElementById(i),fRp=n=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n);
-        const getTgl=()=>{let d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
-        const genId=()=>Math.random().toString(36).substr(2,9),chkDate=(s,t)=>{if(!s)return false;let sr=String(s).trim();if(sr.startsWith(t))return true;try{let d=new Date(sr);if(!isNaN(d.getTime())){d.setHours(12);return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`===t;}}catch(e){}return false;};
-        const pDate=s=>{if(!s)return 0;let d=new Date(s.split(' ')[0]);if(isNaN(d.getTime()))return 0;d.setHours(0,0,0,0);return d.getTime();};
-        const isSrp=n=>n&&String(n).startsWith('[SIRUP] '),gNm=n=>isSrp(n)?String(n).replace('[SIRUP] ',''):String(n);
-        function updatePOSButtons(){if(st.currentUser?.role!=='penjual')return;let bR=el('btn-req-free-pos'),bS=el('btn-simpan-pos');if(!bR||!bS)return;if(st.currentUser.canReqFree){bR.classList.replace('hidden','flex');bS.className="w-[70%] bg-green-600 text-white font-bold py-2 md:py-3.5 rounded-lg shadow-md text-sm md:text-base";}else{bR.classList.replace('flex','hidden');bS.className="w-full bg-green-600 text-white font-bold py-2 md:py-3.5 rounded-lg shadow-md text-sm md:text-base";}}
-        function startRealtime(){unsubs.forEach(u=>u());unsubs=[];unsubs.push(onSnapshot(collection(db,getP('menu')),s=>{st.menu=s.docs.map(d=>d.data());if(st.currentUser?.role==='pemilik')renMenuP();if(st.currentUser?.role==='penjual')renPOS();}));unsubs.push(onSnapshot(collection(db,getP('users')),s=>{st.users=s.docs.map(d=>d.data());if(st.currentUser){let m=st.users.find(u=>u.username===st.currentUser.username);if(m)st.currentUser=m;}if(st.currentUser?.role==='superadmin')renUSA();if(st.currentUser?.role==='pemilik')renUPem();if(st.currentUser?.role==='penjual')updatePOSButtons();}));if(['penjual','pemilik'].includes(st.currentUser?.role)){unsubs.push(onSnapshot(query(collection(db,getP('penjualan')),where('tgl','==',getTgl())),s=>{let l=s.docs.map(d=>d.data());if(st.currentUser?.role==='pemilik'){st.penjualan=st.penjualan.filter(p=>p.tgl!==getTgl());st.penjualan.push(...l);renDash();renJual();}else st.penjualan=l;}));}if(st.currentUser?.role==='pemilik')unsubs.push(onSnapshot(collection(db,getP('stok')),s=>{st.stok=s.docs.map(d=>d.data());renDash();}));}
-        const showV=v=>{['view-login','view-superadmin','view-pemilik','view-penjual'].forEach(i=>el(i).classList.add('hidden'));el('main-header').classList.toggle('hidden',v==='view-login');el(v).classList.remove('hidden');};
-        const oMod=(m,c='')=>{el(m).classList.replace('hidden','flex');if(m==='modal-tambah-akun'){el('akun-context').value=c;el('opt-pemilik').style.display=c==='pemilik'?'none':'block';if(c==='pemilik')el('new-role').value='penjual';el('area-akses-free').style.display=el('new-role').value==='penjual'?'block':'none';}};const cMod=m=>el(m).classList.replace('flex','hidden');
-        function onDateFilterChange(){if(st.currentUser?.role!=='pemilik')return;renDash();renJual();}
-        async function handleLogin(e){if(e)e.preventDefault();let u=el('login-username').value.trim(),p=el('login-password').value,btn=el('btn-login'),err=el('login-error');if(!u||!p)return;btn.textContent='Loading...';btn.disabled=true;try{let users=(await getDocs(collection(db,getP('users')))).docs.map(d=>d.data());if(!users.length){let def={username:'superadmin',password:'123',role:'superadmin'};await setDoc(doc(db,getP('users'),'superadmin'),def);users.push(def);}let f=users.find(x=>x.username===u&&x.password===p);if(f){localStorage.setItem('allco_u',u);localStorage.setItem('allco_p',p);st.currentUser=f;el('user-info').textContent=`${f.username}`;err.classList.add('hidden');if(f.role==='superadmin'){btn.textContent='Masuk';btn.disabled=false;startRealtime();showV('view-superadmin');}else if(f.role==='pemilik'){btn.textContent='Memuat...';el('filter-date').value=getTgl();el('dash-start').value=getTgl();el('dash-end').value=getTgl();st.penjualan=(await getDocs(collection(db,getP('penjualan')))).docs.map(d=>d.data());btn.textContent='Masuk';btn.disabled=false;startRealtime();renPemilik();showV('view-pemilik');switchTab('tab-dashboard');}else{btn.textContent='Masuk';btn.disabled=false;startRealtime();currentPosTab='KOPI';setPosTab('KOPI');showV('view-penjual');updatePOSButtons();}}else{btn.textContent='Masuk';btn.disabled=false;localStorage.removeItem('allco_u');localStorage.removeItem('allco_p');err.textContent="Salah!";err.classList.remove('hidden');}}catch(er){btn.textContent='Masuk';btn.disabled=false;err.textContent="Error: "+er.message;err.classList.remove('hidden');}}
-        function logout(){localStorage.removeItem('allco_u');localStorage.removeItem('allco_p');st.currentUser=null;el('form-login').reset();unsubs.forEach(u=>u());showV('view-login');}
-        async function hTambahAkun(e){e.preventDefault();let u=el('new-username').value.trim(),p=el('new-password').value,r=el('new-role').value,cf=el('new-can-free')?el('new-can-free').checked:false;if(st.users.find(x=>x.username===u))return alert('Ada!');await setDoc(doc(db,getP('users'),u),{username:u,password:p,role:r,canReqFree:cf});alert('OK!');cMod('modal-tambah-akun');el('form-tambah-akun').reset();el('area-akses-free').style.display='block';}
-        async function hapusUser(u){if(confirm(`Hapus ${u}?`))await deleteDoc(doc(db,getP('users'),u));}
-        async function toggleReqFree(u){let usr=st.users.find(x=>x.username===u);if(!usr)return;let nv=!usr.canReqFree;if(confirm(`Akses free ${u}?`)){usr.canReqFree=nv;await setDoc(doc(db,getP('users'),u),usr);if(st.currentUser.role==='superadmin')renUSA();else renUPem();}}
-        function bukaModalEditPass(u){let t=u||st.currentUser.username;el('edit-pass-username').value=t;el('ubah-pass-target').textContent=t===st.currentUser.username?"(Saya)":`(${t})`;el('update-password').value='';oMod('modal-ubah-password');}
-        async function hUbahPass(e){e.preventDefault();let p=el('update-password').value,t=el('edit-pass-username').value,usr=st.users.find(u=>u.username===t);if(!usr)return;usr.password=p;if(t===st.currentUser.username){st.currentUser.password=p;localStorage.setItem('allco_p',p);}await setDoc(doc(db,getP('users'),t),usr);alert('OK!');cMod('modal-ubah-password');}
-        function renUSA(){let tb=el('table-users-sa');tb.innerHTML='';st.users.forEach(u=>{let bd=u.role==='penjual'?(u.canReqFree?' <span class="bg-orange-100 text-[10px] p-1">Free:Y</span>':' <span class="bg-gray-100 text-[10px] p-1">Free:N</span>'):'';let btn=u.role==='penjual'?(u.canReqFree?`<button onclick="toggleReqFree('${u.username}')" class="text-orange-500 mr-2">NoFree</button>`:`<button onclick="toggleReqFree('${u.username}')" class="text-green-600 mr-2">YesFree</button>`):'';tb.innerHTML+=`<tr class="border-b"><td class="p-2">${u.username}${bd}</td><td class="p-2">${u.role}</td><td class="p-2 text-center">${btn}<button onclick="bukaModalEditPass('${u.username}')" class="text-blue-600 mr-2">Pass</button>${u.username!==st.currentUser.username?`<button onclick="hapusUser('${u.username}')" class="text-red-500">Del</button>`:'-'}</td></tr>`;});}
-        function renUPem(){let tb=el('table-users-owner');tb.innerHTML='';st.users.filter(u=>u.role==='penjual').forEach(u=>{let bd=u.canReqFree?' <span class="bg-orange-100 text-[10px] p-1">Free:Y</span>':' <span class="bg-gray-100 text-[10px] p-1">Free:N</span>';let btn=u.canReqFree?`<button onclick="toggleReqFree('${u.username}')" class="text-orange-500 mr-2">NoFree</button>`:`<button onclick="toggleReqFree('${u.username}')" class="text-green-600 mr-2">YesFree</button>`;tb.innerHTML+=`<tr class="border-b"><td class="p-2">${u.username}${bd}</td><td class="p-2">${u.role}</td><td class="p-2 text-center">${btn}<button onclick="bukaModalEditPass('${u.username}')" class="text-blue-600 mr-2">Pass</button><button onclick="hapusUser('${u.username}')" class="text-red-500">Del</button></td></tr>`;});}
-        function switchTab(id){document.querySelectorAll('.tab-content').forEach(e=>e.classList.add('hidden'));document.querySelectorAll('.tab-btn').forEach(e=>{e.classList.remove('border-coffee-600','text-coffee-600','font-bold','border-b-2');e.classList.add('text-gray-500');});el(id).classList.remove('hidden');let b=el('btn-'+id);b.classList.remove('text-gray-500');b.classList.add('border-coffee-600','text-coffee-600','font-bold','border-b-2');if(id==='tab-dashboard')renDash();}
-        function renPemilik(){renDash();renMenuP();renJual();renUPem();['xs','s','m','l','b250','b500','b1l'].forEach(x=>{if(el(`stok-${x}`))el(`stok-${x}`).value=0;if(el(`reject-${x}`))el(`reject-${x}`).value=0;});}
-        function renDash(){let sd=el('dash-start').value||getTgl(),ed=el('dash-end').value||getTgl();const tS=pDate(sd),tE=pDate(ed);let om=0,oC=0,oQ=0,trxC=0,fOm=0,cpT={},cpA={},stA={},cpB={},stB={},rjA={},rjB={},mSales={},tTum=0,tumT={'XS':0,'S':0,'M':0,'L':0};let keys=['XS','S','M','L','250ml','500ml','1L'],dbK={'XS':'XS','S':'S','M':'M','L':'L','250ml':'b250','500ml':'b500','1L':'b1L'},rjK={'XS':'rXS','S':'rS','M':'rM','L':'rL','250ml':'rb250','500ml':'rb500','1L':'rb1L'};keys.forEach(k=>{cpT[k]=0;cpA[k]=0;stA[k]=0;cpB[k]=0;stB[k]=0;rjA[k]=0;rjB[k]=0;});st.penjualan.forEach(x=>{let t=pDate(x.tgl);if(x.isFree&&x.freeStatus==='rejected')return;if(t<=tE){x.items.forEach(i=>{let b=i.ukuran.replace(' (Tumblr)','');if(keys.includes(b)&&!i.ukuran.includes('(Tumblr)'))cpA[b]+=i.qty;});}if(t<tS){x.items.forEach(i=>{let b=i.ukuran.replace(' (Tumblr)','');if(keys.includes(b)&&!i.ukuran.includes('(Tumblr)'))cpB[b]+=i.qty;});}if(t>=tS&&t<=tE){if(x.isFree){fOm+=x.total;trxC++;}else{om+=x.total;trxC++;if(x.kasir?.includes('(QRIS)'))oQ+=x.total;else oC+=x.total;}x.items.forEach(i=>{let b=i.ukuran.replace(' (Tumblr)','');if(keys.includes(b)&&!i.ukuran.includes('(Tumblr)'))cpT[b]+=i.qty;if(i.ukuran?.includes('(Tumblr)')){tTum+=i.qty;if(tumT[b]!==undefined)tumT[b]+=i.qty;}let uk=i.ukuran!=='-'?` (${i.ukuran})`:'';let kn=i.nama+uk;if(!mSales[kn])mSales[kn]={q:0};mSales[kn].q+=i.qty;});}});st.stok.forEach(s=>{let t=pDate(s.tgl);if(t<=tE)keys.forEach(k=>{stA[k]+=parseInt(s[dbK[k]])||0;rjA[k]+=parseInt(s[rjK[k]])||0;});if(t<tS)keys.forEach(k=>{stB[k]+=parseInt(s[dbK[k]])||0;rjB[k]+=parseInt(s[rjK[k]])||0;});});el('dash-omset').textContent=fRp(om);el('dash-trx').textContent=trxC;el('dash-cash').textContent=fRp(oC);el('dash-qris').textContent=fRp(oQ);if(el('dash-free-omset'))el('dash-free-omset').textContent=fRp(fOm);let tCp=cpT['XS']+cpT['S']+cpT['M']+cpT['L'],tBt=cpT['250ml']+cpT['500ml']+cpT['1L'];if(el('dash-tot-cup'))el('dash-tot-cup').textContent=tCp+' Pcs';if(el('dash-tot-botol'))el('dash-tot-botol').textContent=tBt+' Pcs';let tb=el('dash-cup-table');tb.innerHTML='';keys.forEach(sz=>{let l=['250ml','500ml','1L'].includes(sz)?`Botol ${sz==='1L'?'1 Liter':sz}`:`Cup ${sz}`,sK=stB[sz]-cpB[sz]-rjB[sz],tS=stA[sz]-stB[sz],rS=rjA[sz]-rjB[sz],sA=stA[sz]-cpA[sz]-rjA[sz];tb.innerHTML+=`<tr class="border-b"><td class="p-2 font-medium">${l}</td><td class="p-2 text-center">${sK}</td><td class="p-2 text-center text-blue-600 font-bold">${tS>0?'+'+tS:'0'}</td><td class="p-2 text-center text-red-600 font-bold">${cpT[sz]>0?cpT[sz]:'0'}</td><td class="p-2 text-center text-orange-500 font-bold">${rS>0?rS:'0'}</td><td class="p-2 text-center ${sA<0?'text-red-600 bg-red-50':''} font-bold">${sA}</td></tr>`;});tb.innerHTML+=`<tr class="bg-green-50"><td colspan="3" class="p-2 font-bold text-right text-green-900 text-[10px]">Tumblr Pribadi (XS:${tumT['XS']}|S:${tumT['S']}|M:${tumT['M']}|L:${tumT['L']}):</td><td class="p-2 text-center text-green-700 font-bold">${tTum}</td><td colspan="2"></td></tr>`;let tM=el('dash-menu-terjual');tM.innerHTML='';let arrM=Object.keys(mSales).map(k=>({n:k,q:mSales[k].q})).sort((a,b)=>b.q-a.q);if(!arrM.length)tM.innerHTML=`<tr><td colspan="2" class="p-2 text-center text-gray-500">Nihil.</td></tr>`;arrM.forEach(m=>tM.innerHTML+=`<tr class="border-b hover:bg-gray-50"><td class="p-2 font-medium">${m.n}</td><td class="p-2 text-center font-bold text-coffee-700">${m.q} Pcs</td></tr>`);}
-        const dbKKey=k=>k==='b1l'?'b1L':(k.startsWith('b')?k:k.toUpperCase()),rjKKey=k=>k==='b1l'?'rb1L':(k.startsWith('b')?'r'+k:'r'+k.toUpperCase());
-        async function hInputStok(e,ty){e.preventDefault();let t=getTgl(),nd={tgl:t,XS:0,S:0,M:0,L:0,b250:0,b500:0,b1L:0,rXS:0,rS:0,rM:0,rL:0,rb250:0,rb500:0,rb1L:0},ix=st.stok.findIndex(s=>chkDate(s.tgl,t));if(ix>-1)nd={...st.stok[ix]};if(ty==='tambah'){['xs','s','m','l','b250','b500','b1l'].forEach(x=>{nd[dbKKey(x)]+=(parseInt(el(`stok-${x}`).value)||0);el(`stok-${x}`).value=0;});alert('Ditambah!');}else{['xs','s','m','l','b250','b500','b1l'].forEach(x=>{nd[rjKKey(x)]+=(parseInt(el(`reject-${x}`).value)||0);el(`reject-${x}`).value=0;});alert('Dicatat!');}await setDoc(doc(db,getP('stok'),nd.tgl),nd);}
-        async function tutupBuku(){if(!confirm('Tutup Buku hari ini?'))return;try{const b=writeBatch(db);b.set(doc(db,getP('laporan_rekap_harian'),getTgl()),{tgl:getTgl(),tot_omset:parseInt(el('dash-omset').textContent.replace(/[^0-9]/g,''))||0,tot_trx:parseInt(el('dash-trx').textContent)||0,waktu:new Date().toISOString()},{merge:true});await b.commit();alert('OK!');}catch(e){alert(e.message);}}
-        const tglKtg=()=>{let v=el('menu-kategori').value;el('area-harga-minuman').style.display=(v==='KOPI'||v==='NON_KOPI')?'grid':'none';el('area-harga-botolan').style.display=v==='BOTOLAN'?'grid':'none';el('area-harga-sirup').style.display=v==='SIRUP'?'block':'none';};
-        function setMenuTab(t){currentMgmtTab=t;document.querySelectorAll('.mg-tab-btn').forEach(b=>{b.classList.remove('bg-coffee-600','text-white');b.classList.add('bg-white','text-gray-700');});let a=el('btn-mg-'+t);if(a){a.classList.remove('bg-white','text-gray-700');a.classList.add('bg-coffee-600','text-white');}renMenuP();}
-        function renMenuP(){let th=el('thead-menu');if(th){if(currentMgmtTab==='BOTOLAN')th.innerHTML=`<tr><th class="p-2 border-b">Nama</th><th class="p-2 border-b text-center">250ml</th><th class="p-2 border-b text-center">500ml</th><th class="p-2 border-b text-center">1L</th><th class="p-2 border-b text-center">Aksi</th></tr>`;else th.innerHTML=`<tr><th class="p-2 border-b">Nama</th><th class="p-2 border-b text-center">XS/Sat</th><th class="p-2 border-b text-center">S</th><th class="p-2 border-b text-center">M</th><th class="p-2 border-b text-center">L</th><th class="p-2 border-b text-center">Aksi</th></tr>`;}let tb=el('table-menu');tb.innerHTML='';let f=st.menu.filter(m=>(m.kategori||(isSrp(m.nama)?'SIRUP':'KOPI'))===currentMgmtTab).sort((a,b)=>gNm(a.nama).localeCompare(gNm(b.nama)));if(!f.length)return tb.innerHTML=`<tr><td colspan="6" class="p-4 text-center">Kosong</td></tr>`;f.forEach(m=>{let n=gNm(m.nama),p=m.prices;if(currentMgmtTab==='BOTOLAN')tb.innerHTML+=`<tr><td class="p-2">${n}</td><td class="p-2 text-center">${p['250ml']?fRp(p['250ml']):'-'}</td><td class="p-2 text-center">${p['500ml']?fRp(p['500ml']):'-'}</td><td class="p-2 text-center">${p['1L']?fRp(p['1L']):'-'}</td><td class="p-2 text-center"><button onclick="edMenu('${m.id}')" class="text-blue-600 mr-2">Ed</button><button onclick="hapMenu('${m.id}')" class="text-red-600">Del</button></td></tr>`;else tb.innerHTML+=`<tr><td class="p-2">${n}</td><td class="p-2 text-center">${p.XS?fRp(p.XS):'-'}</td><td class="p-2 text-center">${p.S?fRp(p.S):'-'}</td><td class="p-2 text-center">${p.M?fRp(p.M):'-'}</td><td class="p-2 text-center">${p.L?fRp(p.L):'-'}</td><td class="p-2 text-center"><button onclick="edMenu('${m.id}')" class="text-blue-600 mr-2">Ed</button><button onclick="hapMenu('${m.id}')" class="text-red-600">Del</button></td></tr>`;});}
-        async function hSimpanMenu(e){e.preventDefault();let i=el('menu-id').value||genId(),k=el('menu-kategori').value,n=el('menu-nama').value.trim(),iS=k==='SIRUP',iB=k==='BOTOLAN',o={id:i,nama:iS?`[SIRUP] ${n}`:n,kategori:k,prices:{XS:iS?parseInt(el('menu-harga-satuan').value)||0:(!iB?parseInt(el('menu-harga-xs').value)||0:0),S:(!iS&&!iB)?parseInt(el('menu-harga-s').value)||0:0,M:(!iS&&!iB)?parseInt(el('menu-harga-m').value)||0:0,L:(!iS&&!iB)?parseInt(el('menu-harga-l').value)||0:0,'250ml':iB?parseInt(el('menu-harga-b250').value)||0:0,'500ml':iB?parseInt(el('menu-harga-b500').value)||0:0,'1L':iB?parseInt(el('menu-harga-b1l').value)||0:0}};batEdMenu();await setDoc(doc(db,getP('menu'),i),o);}
-        function edMenu(id){let m=st.menu.find(x=>x.id===id);if(!m)return;let k=m.kategori||(isSrp(m.nama)?'SIRUP':'KOPI');el('menu-id').value=id;el('menu-nama').value=gNm(m.nama);el('menu-kategori').value=k;tglKtg();['satuan','xs','s','m','l','b250','b500','b1l'].forEach(x=>el(`menu-harga-${x}`).value='');if(k==='SIRUP')el('menu-harga-satuan').value=m.prices.XS||'';else if(k==='BOTOLAN'){el('menu-harga-b250').value=m.prices['250ml']||'';el('menu-harga-b500').value=m.prices['500ml']||'';el('menu-harga-b1l').value=m.prices['1L']||'';}else{el('menu-harga-xs').value=m.prices.XS||'';el('menu-harga-s').value=m.prices.S||'';el('menu-harga-m').value=m.prices.M||'';el('menu-harga-l').value=m.prices.L||'';}el('form-menu-title').textContent='Edit Menu';el('btn-cancel-edit-menu').classList.remove('hidden');}
-        function batEdMenu(){el('form-tambah-menu-inline').reset();el('menu-id').value='';el('menu-kategori').value='KOPI';tglKtg();el('form-menu-title').textContent='Tambah Menu';el('btn-cancel-edit-menu').classList.add('hidden');}
-        async function hapMenu(id){if(confirm('Hapus?')){if(el('menu-id').value===id)batEdMenu();await deleteDoc(doc(db,getP('menu'),id));}}
-        function renJual(){let tb=el('table-penjualan-pemilik'),fd=el('filter-date').value,fm=el('filter-metode').value,dt=st.penjualan.filter(p=>chkDate(p.tgl,fd)),pA=dt.filter(p=>p.isFree&&p.freeStatus==='pending'),nA=dt.filter(p=>!(p.isFree&&p.freeStatus==='pending'));tb.innerHTML='';if(pA.length>0){el('area-req-free').classList.remove('hidden');let tR=el('table-req-free');tR.innerHTML='';pA.forEach(x=>{let rn=x.items.map(i=>`${i.qty}x ${i.nama}${i.ukuran!=='-'?` (${i.ukuran})`:''}`).join(',');tR.innerHTML+=`<tr><td class="p-2 text-xs">${x.id}</td><td class="p-2">${x.waktu}</td><td class="p-2">${rn}</td><td class="p-2 italic">"${x.alasan}"</td><td class="p-2 text-center"><button onclick="approveFree('${x.id}')" class="bg-green-500 text-white p-1 rounded text-xs mr-1">Apprv</button><button onclick="rejectFree('${x.id}')" class="bg-red-500 text-white p-1 rounded text-xs">Tolak</button></td></tr>`;});}else el('area-req-free').classList.add('hidden');let sC=0,sQ=0;nA.forEach(x=>{if(!x.isFree){if(x.kasir?.includes('(QRIS)'))sQ+=x.total;else sC+=x.total;}});if(el('sum-cash'))el('sum-cash').textContent=fRp(sC);if(el('sum-qris'))el('sum-qris').textContent=fRp(sQ);let dF=nA.filter(p=>{if(p.isFree)return fm==='ALL';let iQ=p.kasir?.includes('(QRIS)');return fm==='ALL'||(fm==='QRIS'&&iQ)||(fm==='CASH'&&!iQ);}).sort((a,b)=>(b.tgl+' '+b.waktu).localeCompare(a.tgl+' '+a.waktu));if(!dF.length)return tb.innerHTML=`<tr><td colspan="6" class="p-4 text-center">Kosong.</td></tr>`;dF.forEach(x=>{let rn=x.items.map(i=>`${i.qty}x ${i.nama}${i.ukuran!=='-'?` (${i.ukuran})`:''}`).join(', '),rB=x.isFree?(x.freeStatus==='approved'?'bg-green-50':'bg-red-50'):'',tT=x.isFree?(x.freeStatus==='approved'?'<span class="text-green-600">FREE</span>':'<span class="text-red-600">DITOLAK</span>'):fRp(x.total);tb.innerHTML+=`<tr class="border-b ${rB}"><td class="p-2 text-xs">${x.id}</td><td class="p-2">${x.waktu}</td><td class="p-2">${x.kasir}</td><td class="p-2">${rn}</td><td class="p-2 font-bold">${tT}</td><td class="p-2 text-center"><button onclick="prt('${x.id}')" class="text-green-600 mr-2">Cetak</button><button onclick="oEdTrx('${x.id}')" class="text-blue-600">Edit</button></td></tr>`;});}
-        async function approveFree(id){if(confirm('Approve?')){let t=st.penjualan.find(p=>p.id===id);t.freeStatus='approved';await setDoc(doc(db,getP('penjualan'),t.id),t);renDash();renJual();}}
-        async function rejectFree(id){if(confirm('Tolak?')){let t=st.penjualan.find(p=>p.id===id);t.freeStatus='rejected';await setDoc(doc(db,getP('penjualan'),t.id),t);renDash();renJual();}}
-        function downloadCSV(){let fd=el('filter-date').value,dt=st.penjualan.filter(p=>chkDate(p.tgl,fd)).sort((a,b)=>(b.tgl+' '+b.waktu).localeCompare(a.tgl+' '+a.waktu));if(!dt.length)return alert('Kosong');let csv='ID,Tgl,Waktu,Kasir,Total,Item\n';dt.forEach(x=>{csv+=`${x.id},${x.tgl},${x.waktu},${x.kasir},${x.total},"${x.items.map(i=>`${i.qty}x ${i.nama}${i.ukuran!=='-'?` (${i.ukuran})`:''}`).join(';')}"\n`;});let l=document.createElement("a");l.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));l.download=`Lap_${fd}.csv`;l.click();}
-        let edTrxId=null;const getUOpts=(id,su)=>{let m=st.menu.find(y=>y.id===id);if(!m||m.kategori==='SIRUP'||isSrp(m.nama))return `<option value="-">-</option>`;if(m.kategori==='BOTOLAN')return ['250ml','500ml','1L'].map(u=>`<option value="${u}" ${u===su?'selected':''}>${u}</option>`).join('');return ['XS','S','M','L','XS (Tumblr)','S (Tumblr)','M (Tumblr)','L (Tumblr)'].map(u=>`<option value="${u}" ${u===su?'selected':''}>${u}</option>`).join('');};
-        function upEdPrc(x){let mI=el(`ed-m-${x}`).value,m=st.menu.find(y=>y.id===mI),s=el(`ed-u-${x}`);s.innerHTML=getUOpts(mI,s.value);let b=s.value.replace(' (Tumblr)',''),p=0;if(m)p=(m.kategori==='SIRUP'||isSrp(m.nama))?m.prices.XS:(m.prices[b]||0);el(`ed-p-${x}`).textContent=fRp(p);}
-        function oEdTrx(id){let t=st.penjualan.find(p=>p.id===id);if(!t)return;edTrxId=id;el('edit-trx-id').textContent=id;el('ed-mbayar').value=t.kasir?.includes('(QRIS)')?'QRIS':'CASH';let c=el('edit-trx-items');c.innerHTML='';t.items.forEach((i,x)=>{let mo=st.menu.map(m=>`<option value="${m.id}" ${m.id===i.menuId?'selected':''}>${gNm(m.nama)}</option>`).join('');c.innerHTML+=`<div class="flex gap-1 p-2 border bg-white rounded"><select id="ed-m-${x}" onchange="upEdPrc(${x})" class="w-1/2 border p-1 text-[10px]">${mo}</select><select id="ed-u-${x}" onchange="upEdPrc(${x})" class="w-1/4 border p-1 text-[10px]">${getUOpts(i.menuId,i.ukuran)}</select><input type="number" id="ed-q-${x}" value="${i.qty}" class="w-1/4 border p-1 text-[10px] text-center"><span id="ed-p-${x}" class="hidden">${fRp(i.harga)}</span></div>`;});oMod('modal-edit-trx');}
-        async function svEdTrx(){let t=st.penjualan.find(p=>p.id===edTrxId);if(!t)return;let nt=0,ni=[];t.items.forEach((o,x)=>{let q=parseInt(el(`ed-q-${x}`).value)||0,mI=el(`ed-m-${x}`).value,uk=el(`ed-u-${x}`).value,b=uk.replace(' (Tumblr)','');if(q>0){let m=st.menu.find(y=>y.id===mI),hg=0;if(m)hg=(m.kategori==='SIRUP'||m.kategori==='BOTOLAN'||isSrp(m.nama))?m.prices.XS:(m.prices[b]||0);nt+=q*hg;ni.push({menuId:mI,nama:m?gNm(m.nama):'Hapus',ukuran:uk,harga:hg,qty:q,subtotal:q*hg});}});if(!ni.length){if(confirm('Hapus Trx?')){await deleteDoc(doc(db,getP('penjualan'),edTrxId));st.penjualan=st.penjualan.filter(p=>p.id!==edTrxId);}}else{t.items=ni;t.total=nt;t.kasir=`${t.kasir.split('(')[0].trim()} (${el('ed-mbayar').value})`;await setDoc(doc(db,getP('penjualan'),t.id),t);}cMod('modal-edit-trx');renDash();renJual();}
-        function setPosTab(t){currentPosTab=t;document.querySelectorAll('.pos-tab-btn').forEach(b=>{b.classList.remove('bg-coffee-600','text-white');b.classList.add('bg-white','text-gray-600');});let a=el('btn-pos-'+t);if(a){a.classList.remove('bg-white','text-gray-600');a.classList.add('bg-coffee-600','text-white');}renPOS();}
-        function renPOS(){let g=el('pos-menu-grid');g.innerHTML='';let f=st.menu.filter(m=>(m.kategori||(isSrp(m.nama)?'SIRUP':'KOPI'))===currentPosTab).sort((a,b)=>gNm(a.nama).localeCompare(gNm(b.nama)));if(!f.length)return g.innerHTML=`<div class="col-span-full text-center text-gray-400">Kosong</div>`;f.forEach(m=>{let n=gNm(m.nama),c=m.kategori==='BOTOLAN'?'bg-blue-100':(currentPosTab==='SIRUP'?'bg-yellow-100':'bg-coffee-100');g.innerHTML+=`<div onclick="pSelM('${m.id}')" class="bg-white border p-2 cursor-pointer active:scale-95 flex flex-col justify-center items-center h-24 rounded-xl shadow-sm"><div class="w-8 h-8 ${c} rounded-full flex items-center justify-center font-bold mb-2">${n.charAt(0)}</div><h3 class="font-bold text-[10px] leading-tight text-center line-clamp-2">${n}</h3></div>`;});}
-        function pSelM(id){let m=st.menu.find(x=>x.id===id);if(!m)return;curMenu=m;let iS=currentPosTab==='SIRUP',iB=m.kategori==='BOTOLAN';el('modal-ukuran-title').textContent=gNm(m.nama);el('modal-ukuran-menuid').value=id;el('modal-ukuran-qty').textContent='1';let c=el('ukuran-options');c.innerHTML='';if(iS){c.innerHTML=`<label class="flex justify-between p-3 border border-coffee-500 bg-coffee-50 rounded"><input type="radio" name="ukuran" value="-" checked class="hidden"><span class="font-bold">Satuan</span><span class="font-bold">${fRp(m.prices.XS)}</span></label>`;}else if(iB){let ck=false;['250ml','500ml','1L'].forEach(s=>{if(m.prices[s]>0){let is=!ck?'checked':'';ck=true;c.innerHTML+=`<label class="flex justify-between p-3 border ${is?'border-coffee-500 bg-coffee-50':''} rounded"><input type="radio" name="ukuran" value="${s}" ${is} class="hidden" onchange="chgRad(this)"><span class="font-bold">${s}</span><span class="font-bold">${fRp(m.prices[s])}</span></label>`;}});}else{let ck=false;['XS','S','M','L'].forEach(s=>{if(m.prices[s]>0){let is=!ck?'checked':'';ck=true;c.innerHTML+=`<label class="flex justify-between p-3 border ${is?'border-coffee-500 bg-coffee-50':''} rounded"><input type="radio" name="ukuran" value="${s}" ${is} class="hidden" onchange="chgRad(this)"><span class="font-bold">${s}</span><span class="font-bold">${fRp(m.prices[s])}</span></label>`;}});c.innerHTML+=`<label class="flex items-center gap-2 p-2 mt-2 bg-green-50 rounded"><input type="checkbox" id="pakai-tumblr"><span class="text-xs font-bold text-green-800">Pakai Tumblr (Stok Cup Aman)</span></label>`;}oMod('modal-pilih-ukuran');}
-        function chgRad(e){document.querySelectorAll('#ukuran-options label').forEach(l=>{l.classList.remove('border-coffee-500','bg-coffee-50');});e.closest('label').classList.add('border-coffee-500','bg-coffee-50');}
-        function uQty(d){let e=el('modal-ukuran-qty');e.textContent=Math.max(1,parseInt(e.textContent)+d);}
-        function addCart(){let u=document.querySelector('input[name="ukuran"]:checked');if(!u)return;let q=parseInt(el('modal-ukuran-qty').textContent),uA=u.value,isT=el('pakai-tumblr')?.checked,uk=isT?uA+' (Tumblr)':uA,h=(curMenu.kategori==='SIRUP'||isSrp(curMenu.nama))?curMenu.prices.XS:(curMenu.prices[uA]||0),ex=cart.find(i=>i.menuId===curMenu.id&&i.ukuran===uk);if(ex){ex.qty+=q;ex.subtotal+=(h*q);}else cart.push({menuId:curMenu.id,nama:gNm(curMenu.nama),ukuran:uk,harga:h,qty:q,subtotal:(h*q)});cMod('modal-pilih-ukuran');renCart();}
-        function renCart(){let c=el('pos-cart-items'),t=0;c.innerHTML='';if(!cart.length){c.innerHTML=`<div class="text-center text-gray-400 text-xs mt-4">Kosong</div>`;el('pos-total').textContent='Rp 0';hitKemb();return;}cart.forEach((i,x)=>{t+=i.subtotal;let ukT=i.ukuran==='-'?'':` <span class="font-normal text-gray-500">(${i.ukuran})</span>`;c.innerHTML+=`<div class="bg-white p-2 border rounded relative"><button onclick="rmCart(${x})" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs">&times;</button><div class="flex justify-between"><div class="text-xs font-bold">${i.nama}${ukT}</div><div class="font-bold text-coffee-700">${fRp(i.subtotal)}</div></div><div class="text-[10px]">${i.qty} x ${fRp(i.harga)}</div></div>`;});el('pos-total').textContent=fRp(t);hitKemb();}
-        function rmCart(x){cart.splice(x,1);renCart();}function clrCart(){if(cart.length&&confirm('Kosongkan?')){cart=[];renCart();}}
-        function tgMet(){el('area-cash-input').style.display=document.querySelector('input[name="metode-bayar"]:checked').value==='CASH'?'block':'none';hitKemb();}
-        function hitKemb(){let t=cart.reduce((s,i)=>s+i.subtotal,0);if(document.querySelector('input[name="metode-bayar"]:checked').value!=='CASH')return el('text-kembalian').textContent='Rp 0';let u=parseInt(el('input-uang-cash').value)||0,k=u-t,tk=el('text-kembalian');if(k<0&&t>0&&u>0){tk.textContent='Kurang!';tk.className='text-red-600 font-bold';}else{tk.textContent=fRp(Math.max(0,k));tk.className='text-gray-800 font-bold';}}
-        async function doPay(){if(!cart.length)return;let t=cart.reduce((s,i)=>s+i.subtotal,0),mb=document.querySelector('input[name="metode-bayar"]:checked').value,uC=0,k=0;if(mb==='CASH'){uC=parseInt(el('input-uang-cash').value)||0;if(uC<t)return alert('Uang kurang!');k=uC-t;}let tx={id:'TRX-'+Date.now().toString().slice(-6),tgl:getTgl(),waktu:new Date().toLocaleTimeString('id-ID'),kasir:`${st.currentUser.username} (${mb})`,items:[...cart],total:t,uangCash:uC,kembalian:k};await setDoc(doc(db,getP('penjualan'),tx.id),tx);cart=[];el('input-uang-cash').value='';tgMet();renCart();alert('OK Disimpan!');}
-        async function submitFreeOrder(){if(!cart.length)return;let tx={id:'FR-'+Date.now().toString().slice(-6),tgl:getTgl(),waktu:new Date().toLocaleTimeString('id-ID'),kasir:`${st.currentUser.username} (FREE)`,items:[...cart],total:cart.reduce((s,i)=>s+i.subtotal,0),uangCash:0,kembalian:0,isFree:true,freeStatus:'pending',alasan:el('free-alasan').value||'-'};await setDoc(doc(db,getP('penjualan'),tx.id),tx);cart=[];el('free-alasan').value='';renCart();cMod('modal-req-free');alert('Req Free Terkirim!');}
-        function bukaRiwayatKasir(){let c=el('list-riwayat-kasir');c.innerHTML='';let l=[...st.penjualan].sort((a,b)=>(b.tgl+' '+b.waktu).localeCompare(a.tgl+' '+a.waktu)).slice(0,5);if(!l.length)return c.innerHTML=`<div class="text-center text-gray-500">Kosong</div>`;l.forEach(t=>{let stB='';if(t.isFree)stB=t.freeStatus==='pending'?'[Pending]':(t.freeStatus==='approved'?'[Apprv]':'[Tolak]');let rn=t.items.map(i=>`${i.qty}x ${i.nama}${i.ukuran!=='-'?` (${i.ukuran})`:''}`).join(', ');c.innerHTML+=`<div class="border p-2 mb-2 rounded bg-white"><div class="flex justify-between"><span class="font-bold text-xs">${t.id} ${stB}</span><span class="text-xs font-bold ${t.freeStatus==='rejected'?'text-red-500 line-through':'text-green-600'}">${fRp(t.total)}</span></div><div class="text-[10px] text-gray-500">${rn}</div></div>`;});oMod('modal-riwayat-kasir');}
-        function prt(t){trxToPrint=typeof t==='string'?st.penjualan.find(p=>p.id===t):t;if(!trxToPrint)return;oMod('modal-pilih-printer');}
-        function cetakWebBrowser(){cMod('modal-pilih-printer');let t=trxToPrint;if(!t)return;let m=t.isFree&&t.freeStatus==='approved'?'FREE':(t.kasir.includes('(')?t.kasir.split('(')[1].replace(')','').trim():'-');el('print-date').textContent=`${t.tgl} ${t.waktu}`;el('print-kasir').textContent=t.kasir.split('(')[0];el('print-id').textContent=t.id;el('print-metode').textContent=m;let tb=el('print-items-table');tb.innerHTML='';t.items.forEach(i=>{let uk=i.ukuran!=='-'?` (${i.ukuran})`:'';tb.innerHTML+=`<tr><td colspan="2"><b>${i.nama}${uk}</b></td></tr><tr><td>${i.qty}x ${i.harga.toLocaleString()}</td><td style="text-align:right">${i.subtotal.toLocaleString()}</td></tr>`;});el('print-total').textContent=fRp(t.total);if(m==='CASH'&&!t.isFree){el('print-cash-section').style.display='block';el('print-tunai').textContent=t.uangCash?.toLocaleString();el('print-kembali').textContent=t.kembalian?.toLocaleString();}else el('print-cash-section').style.display='none';window.print();}
-        function cetakRawBT(){cMod('modal-pilih-printer');let t=trxToPrint;if(!t)return;let m=t.isFree&&t.freeStatus==='approved'?'FREE':(t.kasir.includes('(')?t.kasir.split('(')[1].replace(')','').trim():'-'),s=`[C]<b>ALL CO SHOP</b>\n[C]Karang Anyar\n--------------------------------\nTgl  : ${t.tgl} ${t.waktu}\nKasir: ${t.kasir.split('(')[0]}\nNo   : ${t.id}\nBayar: ${m}\n--------------------------------\n`;t.items.forEach(i=>{let uk=i.ukuran!=='-'?` (${i.ukuran})`:'';s+=`${i.nama}${uk}\n`;let q=`${i.qty}x ${i.harga.toLocaleString()}`,sb=i.subtotal.toLocaleString();s+=`${q}${" ".repeat(Math.max(1,32-q.length-sb.length))}${sb}\n`;});s+=`--------------------------------\n[R]<b>TOTAL: Rp ${t.total.toLocaleString()}</b>\n`;if(m==='CASH'&&!t.isFree)s+=`[R]Tunai: Rp ${t.uangCash?.toLocaleString()}\n[R]Kembali: Rp ${t.kembalian?.toLocaleString()}\n`;s+=`[C]\n[C]Terima Kasih\n[C]\n[C]\n`;window.location.href="intent:"+encodeURI(s)+"#Intent;scheme=rawbt;package=ru.a402d.rawbtprinter;end;";}
-        Object.assign(window,{logout,oMod,cMod,handleLogin,hTambahAkun,hapusUser,toggleReqFree,hUbahPass,switchTab,hInputStok,tglKtg,hSimpanMenu,edMenu,batEdMenu,hapMenu,renJual,downloadCSV,prt,renDash,upEdPrc,oEdTrx,svEdTrx,pSelM,chgRad,uQty,addCart,rmCart,clrCart,doPay,tgMet,hitKemb,setPosTab,setMenuTab,bukaRiwayatKasir,bukaModalEditPass,cetakWebBrowser,cetakRawBT,submitFreeOrder,approveFree,rejectFree,onDateFilterChange,tutupBuku});
-        window.onload=()=>{let u=localStorage.getItem('allco_u'),p=localStorage.getItem('allco_p');if(u&&p){el('login-username').value=u;el('login-password').value=p;handleLogin();}};
+        import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, doc, setDoc, getDocs, getDoc, onSnapshot, deleteDoc, query, where, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const app = initializeApp({
+            apiKey: "AIzaSyBNEPbn2CNscy-Xod3g5xcssQVrkwgmhD4",
+            authDomain: "all-co-karang-anyar.firebaseapp.com",
+            projectId: "all-co-karang-anyar",
+            storageBucket: "all-co-karang-anyar.firebasestorage.app",
+            messagingSenderId: "273793519964",
+            appId: "1:273793519964:web:4360897b3a8deee764b199",
+            measurementId: "G-FCPW36R6JS"
+        });
+        const db = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
+        const appId = 'karang_anyar';
+        const getP = c => typeof __firebase_config !== 'undefined' ? `artifacts/${appId}/public/data/${c}` : c;
+
+        let st = { currentUser: null, users: [], menu: [], stok: [], penjualan: [], appConfig: { package: 'pro', licenseType: 'lifetime', expiryDate: null } };
+        let cart = [], curMenu = null, unsubs = [], currentPosTab = 'KOPI', currentMgmtTab = 'KOPI', trxToPrint = null;
+
+        const el = i => document.getElementById(i);
+        const fRp = n => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(n);
+        const getTgl = () => { let d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+        const genId = () => Math.random().toString(36).substr(2, 9);
+        const chkDate = (s, t) => { if (!s) return false; let sr = String(s).trim(); if (sr.startsWith(t)) return true; try { let d = new Date(sr); if (!isNaN(d.getTime())) { d.setHours(12); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}` === t; } } catch (e) { } return false; };
+        const pDate = s => { if (!s) return 0; let d = new Date(s.split(' ')[0]); if (isNaN(d.getTime())) return 0; d.setHours(0, 0, 0, 0); return d.getTime(); };
+        const isSrp = n => n && String(n).startsWith('[SIRUP] ');
+        const gNm = n => isSrp(n) ? String(n).replace('[SIRUP] ', '') : String(n);
+        const dbKKey = k => k === 'b1l' ? 'b1L' : (k.startsWith('b') ? k : k.toUpperCase());
+        const rjKKey = k => k === 'b1l' ? 'rb1L' : (k.startsWith('b') ? 'r' + k : 'r' + k.toUpperCase());
+
+        // ========== FUNGSI LISENSI ==========
+        function getTodayStr() {
+            const d = new Date();
+            return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        }
+
+        function hitungExpiry(licenseType, duration) {
+            const today = new Date();
+            if (licenseType === 'lifetime') return null;
+            if (licenseType === 'monthly') {
+                today.setMonth(today.getMonth() + parseInt(duration));
+            } else if (licenseType === 'daily') {
+                today.setDate(today.getDate() + parseInt(duration));
+            }
+            return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        }
+
+        function cekLisensi(licenseData) {
+            if (!licenseData || licenseData.type === 'lifetime') return { valid: true, daysLeft: null };
+            if (!licenseData.expiryDate) return { valid: false, daysLeft: -1 };
+
+            const todayStr = getTodayStr();
+            const valid = todayStr <= licenseData.expiryDate;
+
+            // Menghitung selisih hari dengan waktu lokal (hindari kendala UTC)
+            const todayLocal = new Date(todayStr + 'T00:00:00');
+            const expiryLocal = new Date(licenseData.expiryDate + 'T00:00:00');
+            const diffTime = expiryLocal - todayLocal;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            return { valid, daysLeft: diffDays };
+        }
+
+        async function simpanLisensi() {
+            const type = document.getElementById('license-type').value;
+            let duration = 0;
+            if (type === 'monthly') {
+                duration = parseInt(document.getElementById('license-months').value);
+            } else if (type === 'daily') {
+                duration = parseInt(document.getElementById('license-days').value);
+            }
+            const expiry = hitungExpiry(type, duration);
+            try {
+                await setDoc(doc(db, getP('config'), 'app_settings'), {
+                    package: st.appConfig.package || 'pro',
+                    licenseType: type,
+                    licenseDuration: duration,
+                    expiryDate: expiry
+                }, { merge: true });
+                st.appConfig = {
+                    ...st.appConfig,
+                    licenseType: type,
+                    licenseDuration: duration,
+                    expiryDate: expiry
+                };
+                updateLicenseUI();
+                alert('Lisensi berhasil disimpan!');
+            } catch (e) {
+                alert('Gagal: ' + e.message);
+            }
+        }
+
+        function updateLicenseUI() {
+            if (st.currentUser?.role !== 'superadmin') return;
+            const cfg = st.appConfig;
+            const type = cfg.licenseType || 'monthly';
+            document.getElementById('license-type').value = type;
+            toggleLicenseInput();
+            if (type === 'monthly') {
+                document.getElementById('license-months').value = cfg.licenseDuration || 1;
+            } else if (type === 'daily') {
+                document.getElementById('license-days').value = cfg.licenseDuration || 30;
+            }
+            const previewEl = document.getElementById('license-preview');
+            const infoEl = document.getElementById('current-license-info');
+            if (type === 'lifetime') {
+                previewEl.textContent = 'Lisensi SEUMUR HIDUP (tidak akan kadaluarsa)';
+                infoEl.textContent = 'Status: Aktif selamanya';
+            } else {
+                const expiry = cfg.expiryDate || hitungExpiry(type, cfg.licenseDuration || 1);
+                const { daysLeft } = cekLisensi({ type, expiryDate: expiry });
+                previewEl.textContent = `Akan berakhir: ${expiry} (${daysLeft != null ? (daysLeft >= 0 ? `${daysLeft} hari lagi` : 'KADALUARSA') : ''})`;
+                infoEl.textContent = `Status: ${daysLeft >= 0 ? 'Aktif' : 'Kadaluarsa'} | Tipe: ${type === 'monthly' ? 'Bulanan' : 'Harian'} | Berlaku hingga ${expiry}`;
+            }
+        }
+
+        function toggleLicenseInput() {
+            const type = document.getElementById('license-type').value;
+            const durationArea = document.getElementById('license-duration-area');
+            const monthlyInput = document.getElementById('license-monthly-input');
+            const dailyInput = document.getElementById('license-daily-input');
+            if (type === 'lifetime') {
+                durationArea.classList.add('hidden');
+            } else {
+                durationArea.classList.remove('hidden');
+                if (type === 'monthly') {
+                    monthlyInput.classList.remove('hidden');
+                    dailyInput.classList.add('hidden');
+                } else {
+                    monthlyInput.classList.add('hidden');
+                    dailyInput.classList.remove('hidden');
+                }
+            }
+            const duration = type === 'monthly' ? document.getElementById('license-months').value : (type === 'daily' ? document.getElementById('license-days').value : 0);
+            const previewEl = document.getElementById('license-preview');
+            if (type === 'lifetime') {
+                previewEl.textContent = 'Lisensi SEUMUR HIDUP';
+            } else {
+                const expiry = hitungExpiry(type, duration);
+                const { daysLeft } = cekLisensi({ type, expiryDate: expiry });
+                previewEl.textContent = `Perkiraan berakhir: ${expiry} (${daysLeft} hari dari sekarang)`;
+            }
+        }
+
+        function updatePemilikLicenseWarning() {
+            if (st.currentUser?.role !== 'pemilik') return;
+            const cfg = st.appConfig;
+            const { valid, daysLeft } = cekLisensi({
+                type: cfg.licenseType,
+                expiryDate: cfg.expiryDate
+            });
+            const warnEl = document.getElementById('license-warning');
+            const warnText = document.getElementById('license-warning-text');
+            if (!valid) {
+                alert('Lisensi telah habis. Anda akan dikeluarkan.');
+                logout();
+                return;
+            }
+            if (daysLeft != null && daysLeft <= 7) {
+                warnEl.classList.remove('hidden');
+                if (daysLeft > 0) {
+                    warnText.textContent = `Lisensi akan berakhir dalam ${daysLeft} hari. Hubungi Admin untuk perpanjangan.`;
+                } else {
+                    warnText.textContent = `Lisensi berakhir hari ini! Hubungi Admin segera.`;
+                }
+            } else {
+                warnEl.classList.add('hidden');
+            }
+        }
+
+        async function loadConfig() {
+            try {
+                const ref = doc(db, getP('config'), 'app_settings');
+                const snap = await getDoc(ref);
+                if (!snap.exists()) {
+                    const defaultConfig = {
+                        package: 'pro',
+                        licenseType: 'lifetime',
+                        licenseDuration: 0,
+                        expiryDate: null
+                    };
+                    await setDoc(ref, defaultConfig);
+                    st.appConfig = defaultConfig;
+                } else {
+                    st.appConfig = snap.data();
+                    if (!st.appConfig.package) st.appConfig.package = 'pro';
+                    if (!st.appConfig.licenseType) {
+                        st.appConfig.licenseType = 'lifetime';
+                        st.appConfig.expiryDate = null;
+                    }
+                }
+            } catch (e) {
+                st.appConfig = { package: 'pro', licenseType: 'lifetime', licenseDuration: 0, expiryDate: null };
+            }
+        }
+
+        async function handleLogin(e) {
+            if (e) e.preventDefault();
+            const u = el('login-username').value.trim();
+            const p = el('login-password').value;
+            const btn = el('btn-login');
+            const err = el('login-error');
+            if (!u || !p) return;
+            btn.textContent = 'Loading...'; btn.disabled = true;
+            try {
+                let users = (await getDocs(collection(db, getP('users')))).docs.map(d => d.data());
+                if (!users.length) {
+                    let def = { username: 'superadmin', password: '123', role: 'superadmin' };
+                    await setDoc(doc(db, getP('users'), 'superadmin'), def);
+                    users.push(def);
+                }
+                let f = users.find(x => x.username === u && x.password === p);
+                if (!f) {
+                    btn.textContent = 'Masuk'; btn.disabled = false;
+                    err.textContent = "Username atau password salah!";
+                    err.classList.remove('hidden');
+                    return;
+                }
+
+                await loadConfig();
+                const licenseCheck = cekLisensi({
+                    type: st.appConfig.licenseType,
+                    expiryDate: st.appConfig.expiryDate
+                });
+
+                if (f.role !== 'superadmin' && !licenseCheck.valid) {
+                    btn.textContent = 'Masuk'; btn.disabled = false;
+                    err.textContent = "Lisensi telah habis. Hubungi Administrator.";
+                    err.classList.remove('hidden');
+                    localStorage.removeItem('allco_u');
+                    localStorage.removeItem('allco_p');
+                    return;
+                }
+
+                localStorage.setItem('allco_u', u);
+                localStorage.setItem('allco_p', p);
+                st.currentUser = f;
+                el('user-info').textContent = f.username;
+                err.classList.add('hidden');
+
+                if (f.role === 'superadmin') {
+                    btn.textContent = 'Masuk'; btn.disabled = false;
+                    startRealtime();
+                    applyPackageUI();
+                    showV('view-superadmin');
+                    updateLicenseUI();
+                } else if (f.role === 'pemilik') {
+                    el('filter-date').value = getTgl();
+                    el('dash-start').value = getTgl();
+                    el('dash-end').value = getTgl();
+                    st.penjualan = (await getDocs(collection(db, getP('penjualan')))).docs.map(d => d.data());
+                    btn.textContent = 'Masuk'; btn.disabled = false;
+                    startRealtime();
+                    applyPackageUI();
+                    renPemilik();
+                    showV('view-pemilik');
+                    switchTab('tab-dashboard');
+                    updatePemilikLicenseWarning();
+                } else {
+                    btn.textContent = 'Masuk'; btn.disabled = false;
+                    startRealtime();
+                    applyPackageUI();
+                    currentPosTab = 'KOPI';
+                    setPosTab('KOPI');
+                    showV('view-penjual');
+                    updatePOSButtons();
+                }
+            } catch (er) {
+                btn.textContent = 'Masuk'; btn.disabled = false;
+                err.textContent = "Error: " + er.message;
+                err.classList.remove('hidden');
+            }
+        }
+
+        function logout() { localStorage.removeItem('allco_u'); localStorage.removeItem('allco_p'); st.currentUser = null; unsubs.forEach(u => u()); showV('view-login'); }
+        async function hTambahAkun(e) { e.preventDefault(); let u = el('new-username').value.trim(), p = el('new-password').value, r = el('new-role').value, cf = el('new-can-free')?.checked || false; if (st.users.find(x => x.username === u)) return alert('Username sudah ada!'); await setDoc(doc(db, getP('users'), u), { username: u, password: p, role: r, canReqFree: cf }); alert('Berhasil!'); cMod('modal-tambah-akun'); el('form-tambah-akun').reset(); }
+        async function hapusUser(u) { if (confirm(`Hapus ${u}?`)) await deleteDoc(doc(db, getP('users'), u)); }
+        async function toggleReqFree(u) { let usr = st.users.find(x => x.username === u); if (!usr) return; usr.canReqFree = !usr.canReqFree; await setDoc(doc(db, getP('users'), u), usr); if (st.currentUser?.role === 'superadmin') renUSA(); else renUPem(); }
+        function bukaModalEditPass(u) { let t = u || st.currentUser.username; el('edit-pass-username').value = t; el('ubah-pass-target').textContent = t === st.currentUser.username ? "(Saya)" : `(${t})`; oMod('modal-ubah-password'); }
+        async function hUbahPass(e) { e.preventDefault(); let p = el('update-password').value, t = el('edit-pass-username').value, usr = st.users.find(u => u.username === t); if (!usr) return; usr.password = p; if (t === st.currentUser.username) { st.currentUser.password = p; localStorage.setItem('allco_p', p); } await setDoc(doc(db, getP('users'), t), usr); alert('Password berhasil diubah!'); cMod('modal-ubah-password'); }
+        function renUSA() { let tb = el('table-users-sa'); tb.innerHTML = ''; st.users.forEach(u => { let bd = u.role === 'penjual' ? (u.canReqFree ? ' <span class="bg-orange-100 text-[10px] p-1">Free:Y</span>' : ' <span class="bg-gray-100 text-[10px] p-1">Free:N</span>') : ''; let btn = u.role === 'penjual' ? (u.canReqFree ? `<button onclick="toggleReqFree('${u.username}')" class="text-orange-500 mr-2">NoFree</button>` : `<button onclick="toggleReqFree('${u.username}')" class="text-green-600 mr-2">YesFree</button>`) : ''; tb.innerHTML += `<tr class="border-b"><td class="p-2">${u.username}${bd}</td><td class="p-2">${u.role}</td><td class="p-2 text-center">${btn}<button onclick="bukaModalEditPass('${u.username}')" class="text-blue-600 mr-2">Pass</button>${u.username !== st.currentUser.username ? `<button onclick="hapusUser('${u.username}')" class="text-red-500">Del</button>` : '-'}</td></tr>`; }); }
+        function renUPem() { let tb = el('table-users-owner'); tb.innerHTML = ''; st.users.filter(u => u.role === 'penjual').forEach(u => { let bd = u.canReqFree ? ' <span class="bg-orange-100 text-[10px] p-1">Free:Y</span>' : ' <span class="bg-gray-100 text-[10px] p-1">Free:N</span>'; let btn = u.canReqFree ? `<button onclick="toggleReqFree('${u.username}')" class="text-orange-500 mr-2">NoFree</button>` : `<button onclick="toggleReqFree('${u.username}')" class="text-green-600 mr-2">YesFree</button>`; tb.innerHTML += `<tr class="border-b"><td class="p-2">${u.username}${bd}</td><td class="p-2">${u.role}</td><td class="p-2 text-center">${btn}<button onclick="bukaModalEditPass('${u.username}')" class="text-blue-600 mr-2">Pass</button><button onclick="hapusUser('${u.username}')" class="text-red-500">Del</button></td></tr>`; }); }
+        function switchTab(id) {
+            if (id === 'tab-stok' && st.appConfig?.package === 'basic') { alert('Fitur Stok hanya di Pro.'); return; }
+            document.querySelectorAll('.tab-content').forEach(e => e.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(e => { e.classList.remove('border-coffee-600', 'text-coffee-600', 'font-bold', 'border-b-2'); e.classList.add('text-gray-500'); });
+            el(id).classList.remove('hidden');
+            let b = el('btn-' + id);
+            if (b) { b.classList.remove('text-gray-500'); b.classList.add('border-coffee-600', 'text-coffee-600', 'font-bold', 'border-b-2'); }
+            if (id === 'tab-dashboard') renDash();
+        }
+        function renPemilik() { renDash(); renMenuP(); renJual(); renUPem();['s', 'm', 'l', 'b250', 'b500', 'b1l'].forEach(x => { let e1 = el(`stok-${x}`); if (e1) e1.value = 0; let e2 = el(`reject-${x}`); if (e2) e2.value = 0; }); applyPackageUI(); }
+
+        function renDash() {
+            let sd = el('dash-start').value || getTgl(), ed = el('dash-end').value || getTgl();
+            const tS = pDate(sd), tE = pDate(ed);
+            let om = 0, oC = 0, oQ = 0, trxC = 0, fOm = 0, cpT = {}, cpA = {}, stA = {}, cpB = {}, stB = {}, rjA = {}, rjB = {}, mSales = {}, tTum = 0, tumT = { 'S': 0, 'M': 0, 'L': 0 };
+            let keys = ['S', 'M', 'L', '250ml', '500ml', '1L'], dbK = { 'S': 'S', 'M': 'M', 'L': 'L', '250ml': 'b250', '500ml': 'b500', '1L': 'b1L' }, rjK = { 'S': 'rS', 'M': 'rM', 'L': 'rL', '250ml': 'rb250', '500ml': 'rb500', '1L': 'rb1L' };
+            keys.forEach(k => { cpT[k] = 0; cpA[k] = 0; stA[k] = 0; cpB[k] = 0; stB[k] = 0; rjA[k] = 0; rjB[k] = 0; });
+            const isBasic = st.appConfig?.package === 'basic';
+            st.penjualan.forEach(x => { let t = pDate(x.tgl); if (x.isFree && x.freeStatus === 'rejected') return; if (t <= tE) { x.items.forEach(i => { let b = i.ukuran.replace(' (Tumblr)', ''); if (keys.includes(b) && !i.ukuran.includes('(Tumblr)')) cpA[b] += i.qty; }); } if (t < tS) { x.items.forEach(i => { let b = i.ukuran.replace(' (Tumblr)', ''); if (keys.includes(b) && !i.ukuran.includes('(Tumblr)')) cpB[b] += i.qty; }); } if (t >= tS && t <= tE) { if (x.isFree) { fOm += x.total; trxC++; } else { om += x.total; trxC++; if (x.kasir?.includes('(QRIS)')) oQ += x.total; else oC += x.total; } x.items.forEach(i => { let b = i.ukuran.replace(' (Tumblr)', ''); if (keys.includes(b) && !i.ukuran.includes('(Tumblr)')) cpT[b] += i.qty; if (i.ukuran?.includes('(Tumblr)')) { tTum += i.qty; if (tumT[b] !== undefined) tumT[b] += i.qty; } let uk = i.ukuran !== '-' ? ` (${i.ukuran})` : ''; let kn = i.nama + uk; if (!mSales[kn]) mSales[kn] = { q: 0 }; mSales[kn].q += i.qty; }); } });
+            st.stok.forEach(s => { let t = pDate(s.tgl); if (t <= tE) keys.forEach(k => { stA[k] += parseInt(s[dbK[k]]) || 0; rjA[k] += parseInt(s[rjK[k]]) || 0; }); if (t < tS) keys.forEach(k => { stB[k] += parseInt(s[dbK[k]]) || 0; rjB[k] += parseInt(s[rjK[k]]) || 0; }); });
+            el('dash-omset').textContent = fRp(om); el('dash-trx').textContent = trxC; el('dash-cash').textContent = fRp(oC); el('dash-qris').textContent = fRp(oQ);
+            if (el('dash-free-omset')) el('dash-free-omset').textContent = fRp(fOm);
+            let tCp = cpT['S'] + cpT['M'] + cpT['L'], tBt = cpT['250ml'] + cpT['500ml'] + cpT['1L'];
+            if (el('dash-tot-cup')) el('dash-tot-cup').textContent = tCp + ' Pcs';
+            if (el('dash-tot-botol')) el('dash-tot-botol').textContent = tBt + ' Pcs';
+            let tb = el('dash-cup-table');
+            if (tb) {
+                if (isBasic) tb.innerHTML = `<tr><td colspan="6" class="p-2 text-center text-gray-400 text-xs">Fitur stok tersedia di Paket Pro</td></tr>`;
+                else {
+                    tb.innerHTML = '';
+                    keys.forEach(sz => { let l = ['250ml', '500ml', '1L'].includes(sz) ? `Botol ${sz === '1L' ? '1 Liter' : sz}` : `Cup ${sz}`, sK = stB[sz] - cpB[sz] - rjB[sz], tS = stA[sz] - stB[sz], rS = rjA[sz] - rjB[sz], sA = stA[sz] - cpA[sz] - rjA[sz]; tb.innerHTML += `<tr class="border-b"><td class="p-2 font-medium">${l}</td><td class="p-2 text-center">${sK}</td><td class="p-2 text-center text-blue-600 font-bold">${tS > 0 ? '+' + tS : '0'}</td><td class="p-2 text-center text-red-600 font-bold">${cpT[sz] > 0 ? cpT[sz] : '0'}</td><td class="p-2 text-center text-orange-500 font-bold">${rS > 0 ? rS : '0'}</td><td class="p-2 text-center ${sA < 0 ? 'text-red-600 bg-red-50' : ''} font-bold">${sA}</td></tr>`; });
+                    tb.innerHTML += `<tr class="bg-green-50"><td colspan="3" class="p-2 font-bold text-right text-green-900 text-[10px]">Tumblr Pribadi (S:${tumT['S']}|M:${tumT['M']}|L:${tumT['L']}):</td><td class="p-2 text-center text-green-700 font-bold">${tTum}</td><td colspan="2"></td></tr>`;
+                }
+            }
+            let tM = el('dash-menu-terjual'); tM.innerHTML = ''; let arrM = Object.keys(mSales).map(k => ({ n: k, q: mSales[k].q })).sort((a, b) => b.q - a.q); if (!arrM.length) tM.innerHTML = `<tr><td colspan="2" class="p-2 text-center text-gray-500">Nihil.</td></tr>`; arrM.forEach(m => tM.innerHTML += `<tr class="border-b hover:bg-gray-50"><td class="p-2 font-medium">${m.n}</td><td class="p-2 text-center font-bold text-coffee-700">${m.q} Pcs</td></tr>`);
+        }
+
+        async function hInputStok(e, ty) {
+            if (st.appConfig?.package === 'basic') { alert('Fitur Stok hanya di Pro.'); return; }
+            e.preventDefault(); let t = getTgl(); let nd = { tgl: t, S: 0, M: 0, L: 0, b250: 0, b500: 0, b1L: 0, rS: 0, rM: 0, rL: 0, rb250: 0, rb500: 0, rb1L: 0 };
+            let ix = st.stok.findIndex(s => chkDate(s.tgl, t));
+            if (ix > -1) nd = { ...st.stok[ix] };
+            if (ty === 'tambah') {
+                ['s', 'm', 'l', 'b250', 'b500', 'b1l'].forEach(x => { nd[dbKKey(x)] += (parseInt(el(`stok-${x}`).value) || 0); el(`stok-${x}`).value = 0; });
+                alert('Ditambah!');
+            } else {
+                ['s', 'm', 'l', 'b250', 'b500', 'b1l'].forEach(x => { nd[rjKKey(x)] += (parseInt(el(`reject-${x}`).value) || 0); el(`reject-${x}`).value = 0; });
+                alert('Dicatat!');
+            }
+            await setDoc(doc(db, getP('stok'), nd.tgl), nd);
+        }
+        async function tutupBuku() {
+            if (st.appConfig?.package === 'basic') { alert('Fitur Tutup Buku hanya di Pro.'); return; }
+            if (!confirm('Tutup Buku hari ini?')) return;
+            try {
+                const b = writeBatch(db);
+                b.set(doc(db, getP('laporan_rekap_harian'), getTgl()), { tgl: getTgl(), tot_omset: parseInt(el('dash-omset').textContent.replace(/[^0-9]/g, '')) || 0, tot_trx: parseInt(el('dash-trx').textContent) || 0, waktu: new Date().toISOString() }, { merge: true });
+                await b.commit(); alert('OK!');
+            } catch (e) { alert(e.message); }
+        }
+        const tglKtg = () => { let v = el('menu-kategori').value; el('area-harga-minuman').style.display = (v === 'KOPI' || v === 'NON_KOPI') ? 'grid' : 'none'; el('area-harga-botolan').style.display = v === 'BOTOLAN' ? 'grid' : 'none'; el('area-harga-sirup').style.display = v === 'SIRUP' ? 'block' : 'none'; };
+        function setMenuTab(t) { currentMgmtTab = t; document.querySelectorAll('.mg-tab-btn').forEach(b => { b.classList.remove('bg-coffee-600', 'text-white'); b.classList.add('bg-white', 'text-gray-700'); }); let a = el('btn-mg-' + t); if (a) { a.classList.remove('bg-white', 'text-gray-700'); a.classList.add('bg-coffee-600', 'text-white'); } renMenuP(); }
+        function renMenuP() {
+            let th = el('thead-menu');
+            if (th) {
+                if (currentMgmtTab === 'BOTOLAN') th.innerHTML = `<tr><th class="p-2 border-b">Nama</th><th class="p-2 border-b text-center">250ml</th><th class="p-2 border-b text-center">500ml</th><th class="p-2 border-b text-center">1L</th><th class="p-2 border-b text-center">Aksi</th></tr>`;
+                else th.innerHTML = `<tr><th class="p-2 border-b">Nama</th><th class="p-2 border-b text-center">S/Sat</th><th class="p-2 border-b text-center">M</th><th class="p-2 border-b text-center">L</th><th class="p-2 border-b text-center">Aksi</th></tr>`;
+            }
+            let tb = el('table-menu'); tb.innerHTML = '';
+            let f = st.menu.filter(m => (m.kategori || (isSrp(m.nama) ? 'SIRUP' : 'KOPI')) === currentMgmtTab).sort((a, b) => gNm(a.nama).localeCompare(gNm(b.nama)));
+            if (!f.length) return tb.innerHTML = `<tr><td colspan="5" class="p-4 text-center">Kosong</td></tr>`;
+            f.forEach(m => {
+                let n = gNm(m.nama), p = m.prices;
+                if (currentMgmtTab === 'BOTOLAN') tb.innerHTML += `<tr><td class="p-2">${n}</td><td class="p-2 text-center">${p['250ml'] ? fRp(p['250ml']) : '-'}</td><td class="p-2 text-center">${p['500ml'] ? fRp(p['500ml']) : '-'}</td><td class="p-2 text-center">${p['1L'] ? fRp(p['1L']) : '-'}</td><td class="p-2 text-center"><button onclick="edMenu('${m.id}')" class="text-blue-600 mr-2">Ed</button><button onclick="hapMenu('${m.id}')" class="text-red-600">Del</button></td></tr>`;
+                else tb.innerHTML += `<tr><td class="p-2">${n}</td><td class="p-2 text-center">${p.S ? fRp(p.S) : '-'}</td><td class="p-2 text-center">${p.M ? fRp(p.M) : '-'}</td><td class="p-2 text-center">${p.L ? fRp(p.L) : '-'}</td><td class="p-2 text-center"><button onclick="edMenu('${m.id}')" class="text-blue-600 mr-2">Ed</button><button onclick="hapMenu('${m.id}')" class="text-red-600">Del</button></td></tr>`;
+            });
+        }
+        async function hSimpanMenu(e) {
+            e.preventDefault();
+            let i = el('menu-id').value || genId(), k = el('menu-kategori').value, n = el('menu-nama').value.trim(), iS = k === 'SIRUP', iB = k === 'BOTOLAN';
+            let o = {
+                id: i, nama: iS ? `[SIRUP] ${n}` : n, kategori: k,
+                prices: {
+                    XS: 0,
+                    S: iS ? parseInt(el('menu-harga-satuan').value) || 0 : (!iB ? parseInt(el('menu-harga-s').value) || 0 : 0),
+                    M: (!iS && !iB) ? parseInt(el('menu-harga-m').value) || 0 : 0,
+                    L: (!iS && !iB) ? parseInt(el('menu-harga-l').value) || 0 : 0,
+                    '250ml': iB ? parseInt(el('menu-harga-b250').value) || 0 : 0,
+                    '500ml': iB ? parseInt(el('menu-harga-b500').value) || 0 : 0,
+                    '1L': iB ? parseInt(el('menu-harga-b1l').value) || 0 : 0
+                }
+            };
+            if (el('menu-id').value) { let old = st.menu.find(m => m.id === i); if (old) o.prices.XS = old.prices.XS || 0; }
+            batEdMenu();
+            await setDoc(doc(db, getP('menu'), i), o);
+        }
+        function edMenu(id) {
+            let m = st.menu.find(x => x.id === id); if (!m) return;
+            let k = m.kategori || (isSrp(m.nama) ? 'SIRUP' : 'KOPI');
+            el('menu-id').value = id; el('menu-nama').value = gNm(m.nama); el('menu-kategori').value = k; tglKtg();
+            ['satuan', 's', 'm', 'l', 'b250', 'b500', 'b1l'].forEach(x => el(`menu-harga-${x}`).value = '');
+            if (k === 'SIRUP') el('menu-harga-satuan').value = m.prices.S || '';
+            else if (k === 'BOTOLAN') { el('menu-harga-b250').value = m.prices['250ml'] || ''; el('menu-harga-b500').value = m.prices['500ml'] || ''; el('menu-harga-b1l').value = m.prices['1L'] || ''; }
+            else { el('menu-harga-s').value = m.prices.S || ''; el('menu-harga-m').value = m.prices.M || ''; el('menu-harga-l').value = m.prices.L || ''; }
+            el('form-menu-title').textContent = 'Edit Menu'; el('btn-cancel-edit-menu').classList.remove('hidden');
+        }
+        function batEdMenu() { el('form-tambah-menu-inline').reset(); el('menu-id').value = ''; el('menu-kategori').value = 'KOPI'; tglKtg(); el('form-menu-title').textContent = 'Tambah Menu'; el('btn-cancel-edit-menu').classList.add('hidden'); }
+        async function hapMenu(id) { if (confirm('Hapus?')) { if (el('menu-id').value === id) batEdMenu(); await deleteDoc(doc(db, getP('menu'), id)); } }
+        function renJual() {
+            let tb = el('table-penjualan-pemilik'), fd = el('filter-date').value, fm = el('filter-metode').value;
+            let dt = st.penjualan.filter(p => chkDate(p.tgl, fd));
+            let pA = dt.filter(p => p.isFree && p.freeStatus === 'pending'), nA = dt.filter(p => !(p.isFree && p.freeStatus === 'pending'));
+            tb.innerHTML = ''; const isBasic = st.appConfig?.package === 'basic';
+            if (pA.length > 0 && !isBasic) { el('area-req-free').classList.remove('hidden'); let tR = el('table-req-free'); tR.innerHTML = ''; pA.forEach(x => { let rn = x.items.map(i => `${i.qty}x ${i.nama}${i.ukuran !== '-' ? ` (${i.ukuran})` : ''}`).join(','); tR.innerHTML += `<tr><td class="p-2 text-xs">${x.id}</td><td class="p-2">${x.waktu}</td><td class="p-2">${rn}</td><td class="p-2 italic">"${x.alasan}"</td><td class="p-2 text-center"><button onclick="approveFree('${x.id}')" class="bg-green-500 text-white p-1 rounded text-xs mr-1">Apprv</button><button onclick="rejectFree('${x.id}')" class="bg-red-500 text-white p-1 rounded text-xs">Tolak</button></td></tr>`; }); } else { el('area-req-free').classList.add('hidden'); }
+            let sC = 0, sQ = 0; nA.forEach(x => { if (!x.isFree) { if (x.kasir?.includes('(QRIS)')) sQ += x.total; else sC += x.total; } });
+            if (el('sum-cash')) el('sum-cash').textContent = fRp(sC);
+            if (el('sum-qris')) el('sum-qris').textContent = fRp(sQ);
+            let dF = nA.filter(p => { if (p.isFree) return !isBasic && fm === 'ALL'; let iQ = p.kasir?.includes('(QRIS)'); return fm === 'ALL' || (fm === 'QRIS' && iQ) || (fm === 'CASH' && !iQ); }).sort((a, b) => (b.tgl + ' ' + b.waktu).localeCompare(a.tgl + ' ' + a.waktu));
+            if (!dF.length) return tb.innerHTML = `<tr><td colspan="6" class="p-4 text-center">Kosong.</td></tr>`;
+            dF.forEach(x => { let rn = x.items.map(i => `${i.qty}x ${i.nama}${i.ukuran !== '-' ? ` (${i.ukuran})` : ''}`).join(', '), rB = x.isFree ? (x.freeStatus === 'approved' ? 'bg-green-50' : 'bg-red-50') : '', tT = x.isFree ? (x.freeStatus === 'approved' ? '<span class="text-green-600">FREE</span>' : '<span class="text-red-600">DITOLAK</span>') : fRp(x.total); let aksiHtml = `<button onclick="prt('${x.id}')" class="text-green-600 mr-2">Cetak</button>`; if (!isBasic) aksiHtml += `<button onclick="oEdTrx('${x.id}')" class="text-blue-600">Edit</button>`; tb.innerHTML += `<tr class="border-b ${rB}"><td class="p-2 text-xs">${x.id}</td><td class="p-2">${x.waktu}</td><td class="p-2">${x.kasir}</td><td class="p-2">${rn}</td><td class="p-2 font-bold">${tT}</td><td class="p-2 text-center">${aksiHtml}</td></tr>`; });
+        }
+        async function approveFree(id) { if (confirm('Approve?')) { let t = st.penjualan.find(p => p.id === id); if (t) { t.freeStatus = 'approved'; await setDoc(doc(db, getP('penjualan'), t.id), t); renDash(); renJual(); } } }
+        async function rejectFree(id) { if (confirm('Tolak?')) { let t = st.penjualan.find(p => p.id === id); if (t) { t.freeStatus = 'rejected'; await setDoc(doc(db, getP('penjualan'), t.id), t); renDash(); renJual(); } } }
+        function downloadCSV() {
+            if (st.appConfig?.package === 'basic') { alert('Fitur Export hanya di Pro.'); return; }
+            let fd = el('filter-date').value, dt = st.penjualan.filter(p => chkDate(p.tgl, fd)).sort((a, b) => (b.tgl + ' ' + b.waktu).localeCompare(a.tgl + ' ' + a.waktu));
+            if (!dt.length) return alert('Kosong');
+            let csv = 'ID,Tgl,Waktu,Kasir,Total,Item\n';
+            dt.forEach(x => { csv += `${x.id},${x.tgl},${x.waktu},${x.kasir},${x.total},"${x.items.map(i => `${i.qty}x ${i.nama}${i.ukuran !== '-' ? ` (${i.ukuran})` : ''}`).join(';')}"\n`; });
+            let l = document.createElement("a"); l.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); l.download = `Lap_${fd}.csv`; l.click();
+        }
+        let edTrxId = null;
+        const getUOpts = (id, su) => { let m = st.menu.find(y => y.id === id); if (!m || m.kategori === 'SIRUP' || isSrp(m.nama)) return `<option value="-">-</option>`; if (m.kategori === 'BOTOLAN') return ['250ml', '500ml', '1L'].map(u => `<option value="${u}" ${u === su ? 'selected' : ''}>${u}</option>`).join(''); return ['S', 'M', 'L', 'S (Tumblr)', 'M (Tumblr)', 'L (Tumblr)'].map(u => `<option value="${u}" ${u === su ? 'selected' : ''}>${u}</option>`).join(''); };
+        function upEdPrc(x) { let mI = el(`ed-m-${x}`).value, m = st.menu.find(y => y.id === mI), s = el(`ed-u-${x}`); s.innerHTML = getUOpts(mI, s.value); let b = s.value.replace(' (Tumblr)', ''), p = 0; if (m) p = (m.kategori === 'SIRUP' || isSrp(m.nama)) ? m.prices.S : (m.prices[b] || 0); el(`ed-p-${x}`).textContent = fRp(p); }
+        function oEdTrx(id) { if (st.appConfig?.package === 'basic') { alert('Fitur Edit Transaksi hanya di Pro.'); return; } let t = st.penjualan.find(p => p.id === id); if (!t) return; edTrxId = id; el('edit-trx-id').textContent = id; el('ed-mbayar').value = t.kasir?.includes('(QRIS)') ? 'QRIS' : 'CASH'; let c = el('edit-trx-items'); c.innerHTML = ''; t.items.forEach((i, x) => { let mo = st.menu.map(m => `<option value="${m.id}" ${m.id === i.menuId ? 'selected' : ''}>${gNm(m.nama)}</option>`).join(''); c.innerHTML += `<div class="flex gap-1 p-2 border bg-white rounded"><select id="ed-m-${x}" onchange="upEdPrc(${x})" class="w-1/2 border p-1 text-[10px]">${mo}</select><select id="ed-u-${x}" onchange="upEdPrc(${x})" class="w-1/4 border p-1 text-[10px]">${getUOpts(i.menuId, i.ukuran)}</select><input type="number" id="ed-q-${x}" value="${i.qty}" class="w-1/4 border p-1 text-[10px] text-center"><span id="ed-p-${x}" class="hidden">${fRp(i.harga)}</span></div>`; }); oMod('modal-edit-trx'); }
+        async function svEdTrx() {
+            let t = st.penjualan.find(p => p.id === edTrxId); if (!t) return;
+            let nt = 0, ni = [];
+            t.items.forEach((o, x) => {
+                let q = parseInt(el(`ed-q-${x}`).value) || 0, mI = el(`ed-m-${x}`).value, uk = el(`ed-u-${x}`).value, b = uk.replace(' (Tumblr)', '');
+                if (q > 0) {
+                    let m = st.menu.find(y => y.id === mI), hg = 0;
+                    if (m) hg = (m.kategori === 'SIRUP' || m.kategori === 'BOTOLAN' || isSrp(m.nama)) ? m.prices.S : (m.prices[b] || 0);
+                    nt += q * hg;
+                    ni.push({ menuId: mI, nama: m ? gNm(m.nama) : 'Hapus', ukuran: uk, harga: hg, qty: q, subtotal: q * hg });
+                }
+            });
+            if (!ni.length) { if (confirm('Hapus Trx?')) { await deleteDoc(doc(db, getP('penjualan'), edTrxId)); st.penjualan = st.penjualan.filter(p => p.id !== edTrxId); } }
+            else { t.items = ni; t.total = nt; t.kasir = `${t.kasir.split('(')[0].trim()} (${el('ed-mbayar').value})`; await setDoc(doc(db, getP('penjualan'), t.id), t); }
+            cMod('modal-edit-trx'); renDash(); renJual();
+        }
+        function setPosTab(t) { currentPosTab = t; document.querySelectorAll('.pos-tab-btn').forEach(b => { b.classList.remove('bg-coffee-600', 'text-white'); b.classList.add('bg-white', 'text-gray-600'); }); let a = el('btn-pos-' + t); if (a) { a.classList.remove('bg-white', 'text-gray-600'); a.classList.add('bg-coffee-600', 'text-white'); } renPOS(); }
+        function renPOS() { let g = el('pos-menu-grid'); g.innerHTML = ''; let f = st.menu.filter(m => (m.kategori || (isSrp(m.nama) ? 'SIRUP' : 'KOPI')) === currentPosTab).sort((a, b) => gNm(a.nama).localeCompare(gNm(b.nama))); if (!f.length) return g.innerHTML = `<div class="col-span-full text-center text-gray-400">Kosong</div>`; f.forEach(m => { let n = gNm(m.nama), c = m.kategori === 'BOTOLAN' ? 'bg-blue-100' : (currentPosTab === 'SIRUP' ? 'bg-yellow-100' : 'bg-coffee-100'); g.innerHTML += `<div onclick="pSelM('${m.id}')" class="bg-white border p-2 cursor-pointer active:scale-95 flex flex-col justify-center items-center h-24 rounded-xl shadow-sm"><div class="w-8 h-8 ${c} rounded-full flex items-center justify-center font-bold mb-2">${n.charAt(0)}</div><h3 class="font-bold text-[10px] leading-tight text-center line-clamp-2">${n}</h3></div>`; }); }
+        function pSelM(id) {
+            let m = st.menu.find(x => x.id === id); if (!m) return; curMenu = m;
+            let iS = currentPosTab === 'SIRUP', iB = m.kategori === 'BOTOLAN';
+            el('modal-ukuran-title').textContent = gNm(m.nama); el('modal-ukuran-menuid').value = id; el('modal-ukuran-qty').textContent = '1';
+            let c = el('ukuran-options'); c.innerHTML = '';
+            if (iS) {
+                c.innerHTML = `<label class="flex justify-between p-3 border border-coffee-500 bg-coffee-50 rounded"><input type="radio" name="ukuran" value="-" checked class="hidden"><span class="font-bold">Satuan</span><span class="font-bold">${fRp(m.prices.S)}</span></label>`;
+            } else if (iB) {
+                let ck = false;
+                ['250ml', '500ml', '1L'].forEach(s => { if (m.prices[s] > 0) { let is = !ck ? 'checked' : ''; ck = true; c.innerHTML += `<label class="flex justify-between p-3 border ${is ? 'border-coffee-500 bg-coffee-50' : ''} rounded"><input type="radio" name="ukuran" value="${s}" ${is} class="hidden" onchange="chgRad(this)"><span class="font-bold">${s}</span><span class="font-bold">${fRp(m.prices[s])}</span></label>`; } });
+            } else {
+                let ck = false;
+                ['S', 'M', 'L'].forEach(s => { if (m.prices[s] > 0) { let is = !ck ? 'checked' : ''; ck = true; c.innerHTML += `<label class="flex justify-between p-3 border ${is ? 'border-coffee-500 bg-coffee-50' : ''} rounded"><input type="radio" name="ukuran" value="${s}" ${is} class="hidden" onchange="chgRad(this)"><span class="font-bold">${s}</span><span class="font-bold">${fRp(m.prices[s])}</span></label>`; } });
+                c.innerHTML += `<label class="flex items-center gap-2 p-2 mt-2 bg-green-50 rounded"><input type="checkbox" id="pakai-tumblr"><span class="text-xs font-bold text-green-800">Pakai Tumblr (Stok Cup Aman)</span></label>`;
+            }
+            oMod('modal-pilih-ukuran');
+        }
+        function chgRad(e) { document.querySelectorAll('#ukuran-options label').forEach(l => { l.classList.remove('border-coffee-500', 'bg-coffee-50'); }); e.closest('label').classList.add('border-coffee-500', 'bg-coffee-50'); }
+        function uQty(d) { let e = el('modal-ukuran-qty'); e.textContent = Math.max(1, parseInt(e.textContent) + d); }
+        function addCart() {
+            let u = document.querySelector('input[name="ukuran"]:checked'); if (!u) return;
+            let q = parseInt(el('modal-ukuran-qty').textContent), uA = u.value, isT = el('pakai-tumblr')?.checked, uk = isT ? uA + ' (Tumblr)' : uA;
+            let h = (curMenu.kategori === 'SIRUP' || isSrp(curMenu.nama)) ? curMenu.prices.S : (curMenu.prices[uA] || 0);
+            let ex = cart.find(i => i.menuId === curMenu.id && i.ukuran === uk);
+            if (ex) { ex.qty += q; ex.subtotal += (h * q); }
+            else cart.push({ menuId: curMenu.id, nama: gNm(curMenu.nama), ukuran: uk, harga: h, qty: q, subtotal: (h * q) });
+            cMod('modal-pilih-ukuran'); renCart();
+        }
+        function renCart() { let c = el('pos-cart-items'), t = 0; c.innerHTML = ''; if (!cart.length) { c.innerHTML = `<div class="text-center text-gray-400 text-xs mt-4">Kosong</div>`; el('pos-total').textContent = 'Rp 0'; hitKemb(); return; } cart.forEach((i, x) => { t += i.subtotal; let ukT = i.ukuran === '-' ? '' : ` <span class="font-normal text-gray-500">(${i.ukuran})</span>`; c.innerHTML += `<div class="bg-white p-2 border rounded relative"><button onclick="rmCart(${x})" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs">&times;</button><div class="flex justify-between"><div class="text-xs font-bold">${i.nama}${ukT}</div><div class="font-bold text-coffee-700">${fRp(i.subtotal)}</div></div><div class="text-[10px]">${i.qty} x ${fRp(i.harga)}</div></div>`; }); el('pos-total').textContent = fRp(t); hitKemb(); }
+        function rmCart(x) { cart.splice(x, 1); renCart(); }
+        function clrCart() { if (cart.length && confirm('Kosongkan?')) { cart = []; renCart(); } }
+        function tgMet() { el('area-cash-input').style.display = document.querySelector('input[name="metode-bayar"]:checked').value === 'CASH' ? 'block' : 'none'; hitKemb(); }
+        function hitKemb() { let t = cart.reduce((s, i) => s + i.subtotal, 0); if (document.querySelector('input[name="metode-bayar"]:checked').value !== 'CASH') return el('text-kembalian').textContent = 'Rp 0'; let u = parseInt(el('input-uang-cash').value) || 0, k = u - t, tk = el('text-kembalian'); if (k < 0 && t > 0 && u > 0) { tk.textContent = 'Kurang!'; tk.className = 'text-red-600 font-bold'; } else { tk.textContent = fRp(Math.max(0, k)); tk.className = 'text-gray-800 font-bold'; } }
+        async function doPay() {
+            if (!cart.length) return;
+            let t = cart.reduce((s, i) => s + i.subtotal, 0), mb = document.querySelector('input[name="metode-bayar"]:checked').value, uC = 0, k = 0;
+            if (mb === 'CASH') { uC = parseInt(el('input-uang-cash').value) || 0; if (uC < t) return alert('Uang kurang!'); k = uC - t; }
+            let tx = { id: 'TRX-' + Date.now().toString().slice(-6), tgl: getTgl(), waktu: new Date().toLocaleTimeString('id-ID'), kasir: `${st.currentUser.username} (${mb})`, items: [...cart], total: t, uangCash: uC, kembalian: k };
+            await setDoc(doc(db, getP('penjualan'), tx.id), tx);
+            cart = []; el('input-uang-cash').value = ''; tgMet(); renCart(); alert('OK Disimpan!');
+        }
+        async function submitFreeOrder() {
+            if (st.appConfig?.package === 'basic') { alert('Fitur Free Order hanya di Pro.'); return; }
+            if (!cart.length) return;
+            let tx = { id: 'FR-' + Date.now().toString().slice(-6), tgl: getTgl(), waktu: new Date().toLocaleTimeString('id-ID'), kasir: `${st.currentUser.username} (FREE)`, items: [...cart], total: cart.reduce((s, i) => s + i.subtotal, 0), uangCash: 0, kembalian: 0, isFree: true, freeStatus: 'pending', alasan: el('free-alasan').value || '-' };
+            await setDoc(doc(db, getP('penjualan'), tx.id), tx);
+            cart = []; el('free-alasan').value = ''; renCart(); cMod('modal-req-free'); alert('Request Free Order terkirim!');
+        }
+        function bukaRiwayatKasir() {
+            if (st.appConfig?.package === 'basic') { alert('Fitur Riwayat hanya di Pro.'); return; }
+            let c = el('list-riwayat-kasir'); c.innerHTML = '';
+            let l = [...st.penjualan].sort((a, b) => (b.tgl + ' ' + b.waktu).localeCompare(a.tgl + ' ' + a.waktu)).slice(0, 5);
+            if (!l.length) return c.innerHTML = `<div class="text-center text-gray-500">Kosong</div>`;
+            l.forEach(t => { let stB = ''; if (t.isFree) stB = t.freeStatus === 'pending' ? '[Pending]' : (t.freeStatus === 'approved' ? '[Apprv]' : '[Tolak]'); let rn = t.items.map(i => `${i.qty}x ${i.nama}${i.ukuran !== '-' ? ` (${i.ukuran})` : ''}`).join(', '); c.innerHTML += `<div class="border p-2 mb-2 rounded bg-white"><div class="flex justify-between"><span class="font-bold text-xs">${t.id} ${stB}</span><span class="text-xs font-bold ${t.freeStatus === 'rejected' ? 'text-red-500 line-through' : 'text-green-600'}">${fRp(t.total)}</span></div><div class="text-[10px] text-gray-500">${rn}</div></div>`; }); oMod('modal-riwayat-kasir');
+        }
+        function prt(t) { trxToPrint = typeof t === 'string' ? st.penjualan.find(p => p.id === t) : t; if (!trxToPrint) return; oMod('modal-pilih-printer'); }
+        function cetakWebBrowser() {
+            cMod('modal-pilih-printer'); let t = trxToPrint; if (!t) return;
+            let m = t.isFree && t.freeStatus === 'approved' ? 'FREE' : (t.kasir.includes('(') ? t.kasir.split('(')[1].replace(')', '').trim() : '-');
+            el('print-date').textContent = `${t.tgl} ${t.waktu}`; el('print-kasir').textContent = t.kasir.split('(')[0]; el('print-id').textContent = t.id; el('print-metode').textContent = m;
+            let tb = el('print-items-table'); tb.innerHTML = '';
+            t.items.forEach(i => { let uk = i.ukuran !== '-' ? ` (${i.ukuran})` : ''; tb.innerHTML += `<tr><td colspan="2"><b>${i.nama}${uk}</b></td></tr><tr><td>${i.qty}x ${i.harga.toLocaleString()}</td><td style="text-align:right">${i.subtotal.toLocaleString()}</td></tr>`; });
+            el('print-total').textContent = fRp(t.total);
+            if (m === 'CASH' && !t.isFree) { el('print-cash-section').style.display = 'block'; el('print-tunai').textContent = t.uangCash?.toLocaleString(); el('print-kembali').textContent = t.kembalian?.toLocaleString(); }
+            else el('print-cash-section').style.display = 'none';
+            window.print();
+        }
+        function cetakRawBT() {
+            cMod('modal-pilih-printer'); let t = trxToPrint; if (!t) return;
+            let m = t.isFree && t.freeStatus === 'approved' ? 'FREE' : (t.kasir.includes('(') ? t.kasir.split('(')[1].replace(')', '').trim() : '-');
+            let s = `[C]<b>ALL CO SHOP</b>\n[C]Karang Anyar\n--------------------------------\nTgl  : ${t.tgl} ${t.waktu}\nKasir: ${t.kasir.split('(')[0]}\nNo   : ${t.id}\nBayar: ${m}\n--------------------------------\n`;
+            t.items.forEach(i => { let uk = i.ukuran !== '-' ? ` (${i.ukuran})` : ''; s += `${i.nama}${uk}\n`; let q = `${i.qty}x ${i.harga.toLocaleString()}`, sb = i.subtotal.toLocaleString(); s += `${q}${" ".repeat(Math.max(1, 32 - q.length - sb.length))}${sb}\n`; });
+            s += `--------------------------------\n[R]<b>TOTAL: Rp ${t.total.toLocaleString()}</b>\n`;
+            if (m === 'CASH' && !t.isFree) s += `[R]Tunai: Rp ${t.uangCash?.toLocaleString()}\n[R]Kembali: Rp ${t.kembalian?.toLocaleString()}\n`;
+            s += `[C]\n[C]Terima Kasih\n[C]\n[C]\n`;
+            window.location.href = "intent:" + encodeURI(s) + "#Intent;scheme=rawbt;package=ru.a402d.rawbtprinter;end;";
+        }
+        function updatePOSButtons() {
+            if (st.currentUser?.role !== 'penjual') return;
+            let bR = el('btn-req-free-pos'), bS = el('btn-simpan-pos'), bRiwayat = el('btn-riwayat-pos');
+            const isBasic = st.appConfig?.package === 'basic';
+            const showFree = st.currentUser.canReqFree && !isBasic;
+            if (bR) { if (showFree) { bR.classList.replace('hidden', 'flex'); } else { bR.classList.replace('flex', 'hidden'); } }
+            if (bS) { bS.className = showFree ? "w-[70%] bg-green-600 text-white font-bold py-2 md:py-3.5 rounded-lg shadow-md text-sm md:text-base" : "w-full bg-green-600 text-white font-bold py-2 md:py-3.5 rounded-lg shadow-md text-sm md:text-base"; }
+            if (bRiwayat) { bRiwayat.style.display = isBasic ? 'none' : ''; }
+        }
+        function applyPackageUI() {
+            const isBasic = st.appConfig?.package === 'basic';
+            if (st.currentUser?.role === 'superadmin') {
+                let rBasic = document.querySelector('input[name="appPackage"][value="basic"]');
+                let rPro = document.querySelector('input[name="appPackage"][value="pro"]');
+                let statusEl = el('pkg-status');
+                if (rBasic && rPro) { rBasic.checked = isBasic; rPro.checked = !isBasic; if (statusEl) statusEl.textContent = `(Aktif: ${isBasic ? 'Basic' : 'Pro'})`; }
+                updateLicenseUI();
+            }
+            if (st.currentUser?.role === 'pemilik') {
+                let btnStok = el('btn-tab-stok'); if (btnStok) btnStok.style.display = isBasic ? 'none' : '';
+                let dashStokSection = el('dash-stok-section'); if (dashStokSection) dashStokSection.style.display = isBasic ? 'none' : '';
+                let cardCup = el('dash-card-cup'); if (cardCup) cardCup.style.display = isBasic ? 'none' : '';
+                let cardBotol = el('dash-card-botol'); if (cardBotol) cardBotol.style.display = isBasic ? 'none' : '';
+                let btnExp = el('btn-export-csv'); if (btnExp) btnExp.style.display = isBasic ? 'none' : '';
+                let areaFree = el('area-req-free'); if (areaFree) { if (isBasic) areaFree.classList.add('hidden'); else areaFree.classList.remove('hidden'); }
+                updatePemilikLicenseWarning();
+            }
+            if (st.currentUser?.role === 'penjual') updatePOSButtons();
+            if (st.currentUser?.role === 'pemilik') { renDash(); renJual(); }
+        }
+        function startRealtime() {
+            unsubs.forEach(u => u()); unsubs = [];
+            unsubs.push(onSnapshot(collection(db, getP('menu')), s => { st.menu = s.docs.map(d => d.data()); if (st.currentUser?.role === 'pemilik') renMenuP(); if (st.currentUser?.role === 'penjual') renPOS(); }));
+            unsubs.push(onSnapshot(collection(db, getP('users')), s => { st.users = s.docs.map(d => d.data()); if (st.currentUser) { let m = st.users.find(u => u.username === st.currentUser.username); if (m) st.currentUser = m; } if (st.currentUser?.role === 'superadmin') renUSA(); if (st.currentUser?.role === 'pemilik') renUPem(); if (st.currentUser?.role === 'penjual') updatePOSButtons(); }));
+            if (['penjual', 'pemilik'].includes(st.currentUser?.role)) { unsubs.push(onSnapshot(query(collection(db, getP('penjualan')), where('tgl', '==', getTgl())), s => { let l = s.docs.map(d => d.data()); if (st.currentUser?.role === 'pemilik') { st.penjualan = st.penjualan.filter(p => p.tgl !== getTgl()); st.penjualan.push(...l); renDash(); renJual(); } else st.penjualan = l; })); }
+            if (st.currentUser?.role === 'pemilik') unsubs.push(onSnapshot(collection(db, getP('stok')), s => { st.stok = s.docs.map(d => d.data()); renDash(); }));
+            unsubs.push(onSnapshot(doc(db, getP('config'), 'app_settings'), (snap) => { if (snap.exists()) { st.appConfig = snap.data(); if (!st.appConfig.package) st.appConfig.package = 'pro'; if (!st.appConfig.licenseType) { st.appConfig.licenseType = 'lifetime'; st.appConfig.expiryDate = null; } } else { st.appConfig = { package: 'pro', licenseType: 'lifetime', licenseDuration: 0, expiryDate: null }; } applyPackageUI(); }));
+        }
+        const showV = v => { ['view-login', 'view-superadmin', 'view-pemilik', 'view-penjual'].forEach(i => el(i).classList.add('hidden')); el('main-header').classList.toggle('hidden', v === 'view-login'); el(v).classList.remove('hidden'); };
+        const oMod = (m, c = '') => { el(m).classList.replace('hidden', 'flex'); if (m === 'modal-tambah-akun') { el('akun-context').value = c; el('opt-pemilik').style.display = c === 'pemilik' ? 'none' : 'block'; if (c === 'pemilik') el('new-role').value = 'penjual'; el('area-akses-free').style.display = el('new-role').value === 'penjual' ? 'block' : 'none'; } };
+        const cMod = m => el(m).classList.replace('flex', 'hidden');
+        function onDateFilterChange() { if (st.currentUser?.role !== 'pemilik') return; renDash(); renJual(); }
+        async function setPackage(pkg) { if (!confirm(`Ubah paket ke ${pkg.toUpperCase()}?`)) return; try { await setDoc(doc(db, getP('config'), 'app_settings'), { package: pkg, licenseType: st.appConfig.licenseType || 'lifetime', licenseDuration: st.appConfig.licenseDuration || 0, expiryDate: st.appConfig.expiryDate }, { merge: true }); st.appConfig.package = pkg; applyPackageUI(); alert(`Paket ${pkg.toUpperCase()} disimpan.`); } catch (e) { alert('Gagal: ' + e.message); } }
+
+        Object.assign(window, { logout, oMod, cMod, handleLogin, hTambahAkun, hapusUser, toggleReqFree, hUbahPass, switchTab, hInputStok, tglKtg, hSimpanMenu, edMenu, batEdMenu, hapMenu, renJual, downloadCSV, prt, renDash, upEdPrc, oEdTrx, svEdTrx, pSelM, chgRad, uQty, addCart, rmCart, clrCart, doPay, tgMet, hitKemb, setPosTab, setMenuTab, bukaRiwayatKasir, bukaModalEditPass, cetakWebBrowser, cetakRawBT, submitFreeOrder, approveFree, rejectFree, onDateFilterChange, tutupBuku, setPackage, applyPackageUI, simpanLisensi, toggleLicenseInput });
+        window.onload = () => { let u = localStorage.getItem('allco_u'), p = localStorage.getItem('allco_p'); if (u && p) { el('login-username').value = u; el('login-password').value = p; handleLogin(); } };
     </script>
 </body>
-</html> 
+
+</html>
